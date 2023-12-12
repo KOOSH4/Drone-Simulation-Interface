@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 
 public class DroneDynamics {
     private String drone;
-    private int drone_dynamiy_Id;
+    private int drone_dynamic_Id;
     private ZonedDateTime timestamp;
     private int speed;
     private String align_roll;
@@ -106,11 +106,12 @@ public class DroneDynamics {
         this.status = status;
     }
 
-    public int getDrone_dynamiy_Id() {
-        return drone_dynamiy_Id;
-    }
 
-    public void setDrone_dynamiy_Id(int drone_dynamiy_Id) {
-        this.drone_dynamiy_Id = drone_dynamiy_Id;
-    }
+	public int getDrone_dynamic_Id() {
+		return drone_dynamic_Id;
+	}
+
+	public void setDrone_dynamic_Id(int drone_dynamic_Id) {
+		this.drone_dynamic_Id = drone_dynamic_Id;
+	}
 }
