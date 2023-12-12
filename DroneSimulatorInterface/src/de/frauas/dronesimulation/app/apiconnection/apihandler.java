@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,11 +25,19 @@ public class apihandler {
     // Main method
     // Main method1
     public static void main(String[] args) {
+
         System.out.println("parseJsonResponse started...");
+
         callDroneListAPI(10, 20); // offset , Limit
-        String droneTypeApi = "http://dronesim.facets-labs.com/api/dronetypes/60/";
+
+        String droneTypeApi = "http://dronesim.facets-labs.com/api/dronetypes/60/"; // "http://dronesim.facets-labs.com/api/dronetypes/60/"
         callDroneTypeAPI(droneTypeApi);
-        callDroneDynamics();
+
+        String droneDynamicsUri = "http://dronesim.facets-labs.com/api/drones/67/"; // http://dronesim.facets-labs.com/api/drones/67/
+        callDroneDynamics(droneDynamicsUri);
+
+        System.out.println("Done.");
+
     }
 
     public static void callDroneListAPI(int offset, int limit) {
@@ -57,10 +66,10 @@ public class apihandler {
                 in.close();
 
                 // print result
-                System.out.println(response.toString());
+                // System.out.println(response.toString());
 
                 // Call the parseJsonResponse method with the response as argument
-                parseJsonResponse(response.toString(), "droneList");
+                parseJsonResponse(response.toString(), "droneList", null);
             } else {
                 System.out.println("GET request not worked");
             }
@@ -91,8 +100,8 @@ public class apihandler {
                 }
                 in.close();
 
-                System.out.println(response.toString());
-                parseJsonResponse(response.toString(), "droneType");
+                // System.out.println(response.toString());
+                parseJsonResponse(response.toString(), "droneType", null);
 
             }
         } catch (Exception e) {
@@ -100,11 +109,11 @@ public class apihandler {
         }
     }
 
-    public static void callDroneDynamics() {
+    public static void callDroneDynamics(String DroneUri) {
         URL url;
         try {
             // Create a URL object with the endpoint URL
-            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS);
+            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 20);
             // Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // Set the request properties
@@ -126,10 +135,10 @@ public class apihandler {
                 in.close();
 
                 // print result
-                System.out.println(response.toString());
+                // System.out.println(response.toString());
 
                 // Call the parseJsonResponse method with the response as argument
-                parseJsonResponse(response.toString(), "droneDynamics");
+                parseJsonResponse(response.toString(), "droneDynamics", DroneUri);
             } else {
                 System.out.println("GET request not worked");
             }
@@ -140,7 +149,8 @@ public class apihandler {
     }
 
     // Method to process the response
-    public static void parseJsonResponse(String input, String apiType) { // 1- droneList, 2-droneType, 3-DroneDynamics
+    public static void parseJsonResponse(String input, String apiType, String DroneUri) { // 1- droneList, 2-droneType,
+                                                                                          // 3-DroneDynamics
         // Create a JSONObject with the response
         JSONObject wholeFile = new JSONObject(input);
         // Get the "results" array from the JSONObject
@@ -162,9 +172,9 @@ public class apihandler {
                         String droneType = o.getString("dronetype");
 
                         // Print the values
-                        System.out.println("Drone " + id + ": carriage type " + carriageType + " serial number: "
+                        System.out.println("\n" + "Drone " + id + ": carriage type " + carriageType + " serial number: "
                                 + serialNumber + " " + "created: " + dateCreated + " (carriage weight: "
-                                + carriageWeight + "g)");
+                                + carriageWeight + "g)" + " drone type: " + droneType + "\n");
                     }
                 }
                 break;
@@ -179,9 +189,12 @@ public class apihandler {
                 int battery_capacity = o.getInt("battery_capacity");
                 int control_range = o.getInt("control_range");
                 int max_carriage = o.getInt("max_carriage");
-                System.out.println("Drone " + id + ": Manufacturer " + manufacturer + " Type name: " + typename + " "
-                        + "Weight: " + weight + " Max speed: " + max_speed + "Km/h)" + " Battery capacity: "
-                        + battery_capacity + " Control range: " + control_range + "Max carriage:" + max_carriage + "g");
+
+                System.out.println(
+                        "\n" + "Drone " + id + ": Manufacturer " + manufacturer + " Type name: " + typename + " "
+                                + "Weight: " + weight + " Max speed: " + max_speed + "Km/h)" + " Battery capacity: "
+                                + battery_capacity + " Control range: " + control_range + "Max carriage:" + max_carriage
+                                + "g" + "\n");
 
                 break;
             case "droneDynamics":
@@ -191,8 +204,9 @@ public class apihandler {
                     // Get each object in the array
                     JSONObject object = jsonFileDynamic.getJSONObject(i);
                     // If the object has "carriage_type" and "carriage_weight"
-                    if (object.has("speed") && object.has("status")) {
+                    if (object.has("speed") && object.getString("drone").equals(DroneUri + "?format=json")) {
                         // Get the values of "carriage_type" and "carriage_weight"
+
                         String droneLink = object.getString("drone");
                         String timestamp = object.getString("timestamp");
                         int speed = object.getInt("speed");
@@ -206,11 +220,11 @@ public class apihandler {
                         String status = object.getString("status");
 
                         // Print the values
-                        System.out
-                                .println("Drone link: " + droneLink + " Time stamp: " + timestamp + " speed: " + speed);
-                        // System.out.println("Drone " + droneLink + ": carriage type " + carriageType +
-                        // " serial number: "+serialNumber +" " + "created: " + dateCreated + "
-                        // (carriage weight: " + carriageWeight + "g)") ;
+                        System.out.println("Drone Dynamics: ");
+                        System.out.println(
+                                "\n" + status + " " + droneLink + " " + timestamp + " " + speed + " " + alignRoll
+                                        + " " + alignPitch + " " + alignYaw + " " + longitude + " " + latitude + " "
+                                        + batteryStatus + " " + lastSeen + "\n");
                     }
 
                 }
@@ -240,4 +254,5 @@ public class apihandler {
             throw new IllegalArgumentException("Input string is not a valid JSON");
         }
     }
+
 }
