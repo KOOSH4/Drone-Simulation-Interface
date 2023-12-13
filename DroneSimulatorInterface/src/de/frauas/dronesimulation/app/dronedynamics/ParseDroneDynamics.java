@@ -35,15 +35,16 @@ public class ParseDroneDynamics {
                 String status = object.getString("status");
 
                 // Print the values
-                System.out.println("Drone Dynamics: ");
-                System.out.println(
-                        "\n" + status + " " + droneLink + " " + timestamp + " " + speed + " " + alignRoll
-                                + " " + alignPitch + " " + alignYaw + " " + longitude + " " + latitude + " "
-                                + batteryStatus + " " + lastSeen + "\n");
+                // System.out.println("Drone Dynamics: ");
+                // System.out.println(
+                // "\n" + status + " " + droneLink + " " + timestamp + " " + speed + " " +
+                // alignRoll
+                // + " " + alignPitch + " " + alignYaw + " " + longitude + " " + latitude + " "
+                // + batteryStatus + " " + lastSeen + "\n");
                 DroneDynamics droneDynamics = new DroneDynamics(droneLink, timestamp, speed, alignRoll, alignPitch,
                         alignYaw, longitude, latitude, batteryStatus, lastSeen, status);
                 drone.addDroneDynamics(droneDynamics);
-                System.out.println("The DroneDynamics object is created.");
+                // System.out.println("The DroneDynamics object is created.");
             }
         }
     }
