@@ -98,6 +98,14 @@ public class DroneList {
         this.droneType = droneType;
     }
 
+    public List<DroneDynamics> getDroneDynamicsList() {
+        return droneDynamicsList;
+    }
+
+    public void setDroneDynamicsList(List<DroneDynamics> droneDynamicsList) {
+        this.droneDynamicsList = droneDynamicsList;
+    }
+
     public void printStatus() {
         System.out.println("Drone Instance from List: ");
         System.out.println("\n" + id + "\t" + carriageType + "\t" + serialNumber + "\t" + created + "\t"
