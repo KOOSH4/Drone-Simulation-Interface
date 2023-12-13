@@ -99,8 +99,4 @@ public class DroneList {
         this.droneType = droneType;
     }
 
-    protected void finalize() throws Throwable {
-        System.out.println("The DroneList object is being garbage collected.");
-
-    }
 }
