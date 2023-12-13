@@ -17,12 +17,10 @@ public class ParseDroneDynamics {
         for (int i = 0; i < jsonFileDynamic.length(); i++) {
             // Get each object in the array
             JSONObject object = jsonFileDynamic.getJSONObject(i);
-            // If the object has "carriage_type" and "carriage_weight"
-            // System.out.println("DD URI:" + object.getString("drone"));
-            // System.out.println("Drone URI i created:" + DroneUri);
 
+            // If the object has "speed" to make sure its DroneDynamics api payload
+            // and the drone uri is same as the drone uri in the drone list
             if (object.has("speed") && object.getString("drone").equals(DroneUri)) {
-                // Get the values of "carriage_type" and "carriage_weight"
 
                 String droneLink = object.getString("drone");
                 ZonedDateTime timestamp = ZonedDateTime.parse(object.getString("timestamp"));
