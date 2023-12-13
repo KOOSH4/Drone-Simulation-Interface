@@ -12,12 +12,14 @@ public class DroneDynamics {
     private String longitude;
     private String latitude;
     private int batteryStatus;
+    private int batteryPercentage;
+
     private ZonedDateTime lastSeen;
     private String status;
 
     public DroneDynamics(String drone, ZonedDateTime timestamp, int speed, String alignRoll, String alignPitch,
             String alignYaw, String longitude, String latitude, int batteryStatus, ZonedDateTime lastSeen,
-            String status) {
+            String status, int batteryPercentage) {
         super();
         this.drone = drone;
         this.timestamp = timestamp;
@@ -30,6 +32,7 @@ public class DroneDynamics {
         this.batteryStatus = batteryStatus;
         this.lastSeen = lastSeen;
         this.status = status;
+        this.batteryPercentage = batteryPercentage;
     }
 
     public String getDrone() {
@@ -120,13 +123,21 @@ public class DroneDynamics {
         this.status = status;
     }
 
+    public void setBatteryPercentage(int batteryPercentage) {
+        this.batteryPercentage = batteryPercentage;
+    }
+
+    public int getBatteryPercentage() {
+        return batteryPercentage;
+    }
+
     public void printStatus() {
         System.out.println("Drone Dynamics: ");
         System.out.println(
                 "\n" + drone + "\t" + status + "\t" + timestamp + "\t" + speed + "\t" +
                         alignRoll
                         + "\t" + alignPitch + "\t" + alignYaw + "\t" + longitude + "\t" + latitude + "\t"
-                        + batteryStatus + "\t" + lastSeen + "\n");
+                        + batteryStatus + "\t" + lastSeen + "\n" + " Battery Percentage:  " + batteryPercentage + "\n");
     }
 
 }

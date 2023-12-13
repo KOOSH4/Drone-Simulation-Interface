@@ -41,8 +41,9 @@ public class ParseDroneDynamics {
                 // alignRoll
                 // + " " + alignPitch + " " + alignYaw + " " + longitude + " " + latitude + " "
                 // + batteryStatus + " " + lastSeen + "\n");
+                int batteryPercentage = (batteryStatus / drone.getDroneType().getBatterycapacity()) * 100;
                 DroneDynamics droneDynamics = new DroneDynamics(droneLink, timestamp, speed, alignRoll, alignPitch,
-                        alignYaw, longitude, latitude, batteryStatus, lastSeen, status);
+                        alignYaw, longitude, latitude, batteryStatus, lastSeen, status, batteryPercentage);
                 drone.addDroneDynamics(droneDynamics);
                 // System.out.println("The DroneDynamics object is created.");
             }
