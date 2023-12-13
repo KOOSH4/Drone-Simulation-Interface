@@ -29,7 +29,6 @@ public class DroneList {
         this.carriageWeight = carriageWeight;
         this.carriageType = carriageType;
         this.droneDynamicsList = new ArrayList<>(); // Initialize empty list for DroneDynamics
-        System.out.println("The DroneList object is created.");
 
     }
 
