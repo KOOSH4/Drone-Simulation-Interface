@@ -4,7 +4,6 @@ import java.time.ZonedDateTime;
 
 public class DroneDynamics {
     private String drone;
-
     private ZonedDateTime timestamp;
     private int speed;
     private String alignRoll;
@@ -119,6 +118,15 @@ public class DroneDynamics {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void printStatus() {
+        System.out.println("Drone Dynamics: ");
+        System.out.println(
+                "\n" + drone + "\t" + status + "\t" + timestamp + "\t" + speed + "\t" +
+                        alignRoll
+                        + "\t" + alignPitch + "\t" + alignYaw + "\t" + longitude + "\t" + latitude + "\t"
+                        + batteryStatus + "\t" + lastSeen + "\n");
     }
 
 }

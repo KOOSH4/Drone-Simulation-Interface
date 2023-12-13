@@ -98,4 +98,10 @@ public class DroneList {
         this.droneType = droneType;
     }
 
+    public void printStatus() {
+        System.out.println("Drone Instance from List: ");
+        System.out.println("\n" + id + "\t" + carriageType + "\t" + serialNumber + "\t" + created + "\t"
+                + carriageWeight + "g)" + "\t" + droneTypeUri + "\n");
+    }
+
 }

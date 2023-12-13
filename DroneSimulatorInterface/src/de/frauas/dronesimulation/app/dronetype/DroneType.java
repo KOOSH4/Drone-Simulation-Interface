@@ -86,4 +86,14 @@ public class DroneType {
     public void setMaxCarriage(int _maxCarriage) {
         this.maxCarriage = _maxCarriage;
     }
+
+    public void printStatus() {
+        System.out.println("Drone Type: ");
+        System.out.println(
+                "\n" + typeId + "\t" + manufacturer
+                        + "\t" + typeName + "\t" + weight + "\t" + maxSpeed + "Km/h)" + "\t"
+                        + batteryCapacity + "\t" + controlRange + "\t" +
+                        maxCarriage
+                        + "g" + "\n");
+    }
 }
