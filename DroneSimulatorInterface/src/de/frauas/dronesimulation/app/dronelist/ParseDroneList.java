@@ -7,13 +7,12 @@ import java.util.List;
 
 public class ParseDroneList {
 
-    public static void parseJsonResponse(String input, List<DroneList> droneInstanceList) { // 1- droneList,
-                                                                                            // 2-droneType,
-        // 3-DroneDynamics
+    public static void parseJsonResponse(String input, List<DroneList> droneInstanceList) {
+
         // Create a JSONObject with the response
         JSONObject wholeFile = new JSONObject(input);
-        // Get the "results" array from the JSONObject
 
+        // Get the "results" array from the JSONObject
         JSONArray jsonFile = wholeFile.getJSONArray("results");
         // Loop through the array
         for (int i = 0; i < jsonFile.length(); i++) {
@@ -30,9 +29,10 @@ public class ParseDroneList {
                 String droneTypeUri = o.getString("dronetype");
 
                 // Print the values
-                System.out.println("\n" + "Drone " + id + ": carriage type " + carriageType + " serial number: "
-                        + serialNumber + " " + "created: " + created + " (carriage weight: "
-                        + carriageWeight + "g)" + " drone type: " + droneTypeUri + "\n");
+                // System.out.println("\n" + "Drone " + id + ": carriage type " + carriageType +
+                // " serial number: "
+                // + serialNumber + " " + "created: " + created + " (carriage weight: "
+                // + carriageWeight + "g)" + " drone type: " + droneTypeUri + "\n");
                 DroneList drone = new DroneList(id, droneTypeUri, created, serialNumber, carriageWeight,
                         carriageType);
                 droneInstanceList.add(drone);
