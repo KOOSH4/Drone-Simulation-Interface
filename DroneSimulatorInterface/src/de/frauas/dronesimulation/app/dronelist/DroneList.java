@@ -1,14 +1,45 @@
 package de.frauas.dronesimulation.app.dronelist;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
+import de.frauas.dronesimulation.app.dronetype.DroneType;
 
 public class DroneList {
     private int id;
-    private String dronetype;
+    private DroneType droneType; // instance of DroneType class
+    private String droneTypeUri; // we can use this to call the DroneType API
     private ZonedDateTime created;
-    private String serialnumber;
-    private int carriage_weight;
-    private String carriage_type;
+    private String serialNumber;
+    private int carriageWeight;
+    private String carriageType;
+    private List<DroneDynamics> droneDynamicsList; // To hold many DroneDynamics
+
+    // Constructor
+    public DroneList(int id /* , DroneType droneType */, String droneTypeUri, ZonedDateTime created,
+            String serialNumber,
+            int carriageWeight, String carriageType) {
+        this.id = id;
+        // this.droneType = droneType;
+        this.droneTypeUri = droneTypeUri;
+        this.created = created;
+        this.serialNumber = serialNumber;
+        this.carriageWeight = carriageWeight;
+        this.carriageType = carriageType;
+        this.droneDynamicsList = new ArrayList<>(); // Initialize empty list for DroneDynamics
+        System.out.println("The DroneList object is created.");
+
+    }
+
+    public DroneList() {
+    }
+
+    // Add a DroneDynamics instance to the list
+    public void addDroneDynamics(DroneDynamics dynamics) {
+        droneDynamicsList.add(dynamics);
+    }
 
     // Getters and setters for each field
 
@@ -20,12 +51,12 @@ public class DroneList {
         this.id = id;
     }
 
-    public String getDronetype() {
-        return dronetype;
+    public String getDronetypeUri() {
+        return droneTypeUri;
     }
 
-    public void setDronetype(String dronetype) {
-        this.dronetype = dronetype;
+    public void setDronetype(String droneTypeUri) {
+        this.droneTypeUri = droneTypeUri;
     }
 
     public ZonedDateTime getCreated() {
@@ -37,26 +68,39 @@ public class DroneList {
     }
 
     public String getSerialnumber() {
-        return serialnumber;
+        return serialNumber;
     }
 
-    public void setSerialnumber(String serialnumber) {
-        this.serialnumber = serialnumber;
+    public void setSerialnumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    public int getCarriage_weight() {
-        return carriage_weight;
+    public int getCarriageWeight() {
+        return carriageWeight;
     }
 
-    public void setCarriage_weight(int carriage_weight) {
-        this.carriage_weight = carriage_weight;
+    public void setCarriageWeight(int carriageWeight) {
+        this.carriageWeight = carriageWeight;
     }
 
-    public String getCarriage_type() {
-        return carriage_type;
+    public String getCarriageType() {
+        return carriageType;
     }
 
-    public void setCarriage_type(String carriage_type) {
-        this.carriage_type = carriage_type;
+    public void setCarriageType(String carriageType) {
+        this.carriageType = carriageType;
+    }
+
+    public DroneType getDroneType() {
+        return droneType;
+    }
+
+    public void setDroneType(DroneType droneType) {
+        this.droneType = droneType;
+    }
+
+    protected void finalize() throws Throwable {
+        System.out.println("The DroneList object is being garbage collected.");
+
     }
 }

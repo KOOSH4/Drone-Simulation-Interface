@@ -4,19 +4,34 @@ import java.time.ZonedDateTime;
 
 public class DroneDynamics {
     private String drone;
-    private int drone_dynamic_Id;
+
     private ZonedDateTime timestamp;
     private int speed;
-    private String align_roll;
-    private String align_pitch;
-    private String align_yaw;
+    private String alignRoll;
+    private String alignPitch;
+    private String alignYaw;
     private String longitude;
     private String latitude;
-    private int battery_status;
-    private ZonedDateTime last_seen;
+    private int batteryStatus;
+    private ZonedDateTime lastSeen;
     private String status;
 
-    // Getters and setters for each field
+    public DroneDynamics(String drone, ZonedDateTime timestamp, int speed, String alignRoll, String alignPitch,
+            String alignYaw, String longitude, String latitude, int batteryStatus, ZonedDateTime lastSeen,
+            String status) {
+        super();
+        this.drone = drone;
+        this.timestamp = timestamp;
+        this.speed = speed;
+        this.alignRoll = alignRoll;
+        this.alignPitch = alignPitch;
+        this.alignYaw = alignYaw;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.batteryStatus = batteryStatus;
+        this.lastSeen = lastSeen;
+        this.status = status;
+    }
 
     public String getDrone() {
         return drone;
@@ -42,28 +57,28 @@ public class DroneDynamics {
         this.speed = speed;
     }
 
-    public String getAlign_roll() {
-        return align_roll;
+    public String getAlignRoll() {
+        return alignRoll;
     }
 
-    public void setAlign_roll(String align_roll) {
-        this.align_roll = align_roll;
+    public void setAlignRoll(String alignRoll) {
+        this.alignRoll = alignRoll;
     }
 
-    public String getAlign_pitch() {
-        return align_pitch;
+    public String getAlignPitch() {
+        return alignPitch;
     }
 
-    public void setAlign_pitch(String align_pitch) {
-        this.align_pitch = align_pitch;
+    public void setAlignPitch(String alignPitch) {
+        this.alignPitch = alignPitch;
     }
 
-    public String getAlign_yaw() {
-        return align_yaw;
+    public String getAlignYaw() {
+        return alignYaw;
     }
 
-    public void setAlign_yaw(String align_yaw) {
-        this.align_yaw = align_yaw;
+    public void setAlignYaw(String alignYaw) {
+        this.alignYaw = alignYaw;
     }
 
     public String getLongitude() {
@@ -82,20 +97,20 @@ public class DroneDynamics {
         this.latitude = latitude;
     }
 
-    public int getBattery_status() {
-        return battery_status;
+    public int getBatteryStatus() {
+        return batteryStatus;
     }
 
-    public void setBattery_status(int battery_status) {
-        this.battery_status = battery_status;
+    public void setBatteryStatus(int batteryStatus) {
+        this.batteryStatus = batteryStatus;
     }
 
-    public ZonedDateTime getLast_seen() {
-        return last_seen;
+    public ZonedDateTime getLastSeen() {
+        return lastSeen;
     }
 
-    public void setLast_seen(ZonedDateTime last_seen) {
-        this.last_seen = last_seen;
+    public void setLastSeen(ZonedDateTime lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     public String getStatus() {
@@ -106,12 +121,4 @@ public class DroneDynamics {
         this.status = status;
     }
 
-
-	public int getDrone_dynamic_Id() {
-		return drone_dynamic_Id;
-	}
-
-	public void setDrone_dynamic_Id(int drone_dynamic_Id) {
-		this.drone_dynamic_Id = drone_dynamic_Id;
-	}
 }
