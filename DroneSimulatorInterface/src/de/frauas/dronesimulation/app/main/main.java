@@ -26,6 +26,18 @@ public class main {
 		}
 		int count = 0;
 
+		Helper.getDroneDynammics(apihandler, droneInstanceList.get(count), 0); // get amd write drone dynamics for
+																				// drone
+																				// dynamics for
+																				// second drone
+																				// in
+		// apihandler.callDroneDynamics(droneInstanceList.get(count), 12); // get amd
+		// write drone dynamics for second drone
+		// in
+		// list.
+		Helper.printDroneDynamicsStatus(droneInstanceList, count);
+		// droneInstanceList.get(count).getDroneDynamicsList().get(0).printStatus(); //
+		// print drone dynamics status
 	}
 
 }

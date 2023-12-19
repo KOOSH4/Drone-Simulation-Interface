@@ -110,12 +110,12 @@ public class apihandler {
         }
     }
 
-    public static void callDroneDynamics(DroneList drone) {
+    public void callDroneDynamics(DroneList drone, int offset) {
         URL url;
         try {
             // Create a URL object with the endpoint URL
 
-            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 20);
+            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 20 + "&offset=" + offset);
             // Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // Set the request properties
