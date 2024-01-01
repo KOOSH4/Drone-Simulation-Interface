@@ -43,38 +43,39 @@ public class apihandler {
     public static void callDroneListAPI(int offset, int limit, List<DroneList> droneInstanceList) {
         URL url;
         try {
-            // Create a URL object with the endpoint URL
+            // Create a URL object with the endpoint URL, offset and limit as query
+            // parameters
             url = new URL(ENDPOINT_URL_DRONE_LIST + "&offset=" + offset + "&limit=" + limit);
             // Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // Set the request properties
-            connection.setRequestProperty("Authorization", TOKEN);
-            connection.setRequestProperty("User-Agent", USER_AGENT);
-            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", TOKEN); // Set the Authorization header with the TOKEN
+            connection.setRequestProperty("User-Agent", USER_AGENT); // Set the User-Agent header
+            connection.setRequestMethod("GET"); // Set the request method to GET
 
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response Code : " + responseCode);
+            int responseCode = connection.getResponseCode(); // Get the response code
+            System.out.println("Response Code : " + responseCode); // Print the response code
 
-            if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            if (responseCode == HttpURLConnection.HTTP_OK) { // If the response code is HTTP_OK (200)
+                // Create a BufferedReader to read the response
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
 
+                // Read the response line by line
                 while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                    response.append(inputLine); // Append each line to the response StringBuffer
                 }
-                in.close();
+                in.close(); // Close the BufferedReader
 
-                // print result
-                // System.out.println(response.toString());
-
-                // Call the parseJsonResponse method with the response as argument
+                // Pass the <responseParse the JSON response and update the droneInstanceList
                 ParseDroneList.parseJsonResponse(response.toString(), droneInstanceList);
             } else {
-                System.out.println("GET request not worked");
+                System.out.println("GET request not worked"); // Print an error message if the response code is not
+                                                              // HTTP_OK
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Print the stack trace if an exception is thrown
         }
     }
 
@@ -96,7 +97,8 @@ public class apihandler {
                 String inputLine;
                 StringBuffer response = new StringBuffer();
 
-                while ((inputLine = in.readLine()) != null) {
+                while ((inputLine = in.readLine()) != null) { // this code reads all the data from an input stream and
+                                                              // stores it in a StringBuilder object.
                     response.append(inputLine);
                 }
                 in.close();

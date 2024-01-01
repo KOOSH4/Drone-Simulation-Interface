@@ -34,16 +34,6 @@ public class ParseDroneDynamics {
                 ZonedDateTime lastSeen = ZonedDateTime.parse(object.getString("last_seen"));
                 String status = object.getString("status");
 
-                // Print the values
-                // System.out.println("Drone Dynamics: ");
-                // System.out.println(
-                // "\n" + status + " " + droneLink + " " + timestamp + " " + speed + " " +
-                // alignRoll
-                // + " " + alignPitch + " " + alignYaw + " " + longitude + " " + latitude + " "
-                // + batteryStatus + " " + lastSeen + "\n");
-                // System.out.println("BATTERY CAPACITY: " +
-                // drone.getDroneType().getBatterycapacity());
-                // System.out.println("BATTERY STATUS: " + batteryStatus);
                 int batteryPercentage = (batteryStatus * 100) / drone.getDroneType().getBatterycapacity();
                 // int batteryPercentage = 100;
                 System.out.println("BATTERY PERCENTAGE: " + batteryPercentage);

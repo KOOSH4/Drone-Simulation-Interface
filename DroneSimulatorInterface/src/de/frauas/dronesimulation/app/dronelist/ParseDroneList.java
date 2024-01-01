@@ -28,11 +28,6 @@ public class ParseDroneList {
                 String serialNumber = o.getString("serialnumber");
                 String droneTypeUri = o.getString("dronetype");
 
-                // Print the values
-                // System.out.println("\n" + "Drone " + id + ": carriage type " + carriageType +
-                // " serial number: "
-                // + serialNumber + " " + "created: " + created + " (carriage weight: "
-                // + carriageWeight + "g)" + " drone type: " + droneTypeUri + "\n");
                 DroneList drone = new DroneList(id, droneTypeUri, created, serialNumber, carriageWeight,
                         carriageType);
                 droneInstanceList.add(drone);
