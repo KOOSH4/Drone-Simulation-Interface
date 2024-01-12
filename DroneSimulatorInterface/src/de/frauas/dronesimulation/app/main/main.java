@@ -12,7 +12,7 @@ public class main {
 	public static void main(String[] args) {
 		apihandler apihandler = new apihandler();
 		List<DroneList> droneInstanceList = new ArrayList<>(); // Initialize empty list for DroneList
-		apihandler.callDroneListAPI(0, 20, droneInstanceList);
+		apihandler.callDroneListAPI(0, 30, droneInstanceList);
 
 		for (DroneList droneinstance : droneInstanceList) {
 			apihandler.callDroneTypeAPI(droneinstance); // get and write drone type for
@@ -24,7 +24,7 @@ public class main {
 		}
 		int count = 1;
 
-		Helper.getDroneDynammics(apihandler, droneInstanceList.get(count), 100); // get amd write drone dynamics for
+		Helper.getDroneDynammics(apihandler, droneInstanceList.get(count), 0); //1-1441 get amd write drone dynamics for
 																					// drone
 																					// dynamics for
 																					// second drone
