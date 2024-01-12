@@ -6,9 +6,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/olad/Downloads/JSON Library (Example)-20231204/json-20231013.jar" sourcepath="C:/Users/olad/Downloads/JSON Library (Example)-20231204/json-20231013-sources.jar">
+	<classpathentry kind="lib" path="Lib/json-20231013.jar" sourcepath="Lib/json-20231013-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/olad/Downloads/JSON%20Library%20(Example)-20231204/json-20231013-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/DroneSimulatorInterface/Lib/json-20231013-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
