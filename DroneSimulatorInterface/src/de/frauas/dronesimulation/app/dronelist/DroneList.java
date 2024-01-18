@@ -22,7 +22,7 @@ public class DroneList {
             String serialNumber,
             int carriageWeight, String carriageType) {
         this.id = id;
-        // this.droneType = droneType;
+        // this.droneType = droneType;;
         this.droneTypeUri = droneTypeUri;
         this.created = created;
         this.serialNumber = serialNumber;
