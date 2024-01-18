@@ -2,10 +2,10 @@ package de.frauas.dronesimulation.app.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import de.frauas.dronesimulation.app.ui.main.*;
 
 import de.frauas.dronesimulation.app.apiconnection.apihandler; // Import the apihandler class
 import de.frauas.dronesimulation.app.dronelist.DroneList;
-
 import de.frauas.dronesimulation.app.main.Helper;
 
 public class main {
@@ -24,11 +24,12 @@ public class main {
 		}
 		int count = 1;
 
-		Helper.getDroneDynammics(apihandler, droneInstanceList.get(count), 0); //1-1441 get amd write drone dynamics for
-																					// drone
-																					// dynamics for
-																					// second drone
-																					// in
+		Helper.getDroneDynammics(apihandler, droneInstanceList.get(count), 0); // 1-1441 get amd write drone dynamics
+																				// for
+																				// drone
+																				// dynamics for
+																				// second drone
+																				// in
 		// apihandler.callDroneDynamics(droneInstanceList.get(count), 12); // get amd
 		// write drone dynamics for second drone
 		// in
@@ -37,6 +38,9 @@ public class main {
 		Helper.payloadPercentage(droneInstanceList.get(count));
 		// droneInstanceList.get(count).getDroneDynamicsList().get(0).printStatus(); //
 		// print drone dynamics status
+		Main mainInstance = new Main(droneInstanceList);
+		mainInstance.setVisible(true);
+
 	}
 
 }
