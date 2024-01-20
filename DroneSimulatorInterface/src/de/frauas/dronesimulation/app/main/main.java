@@ -2,11 +2,40 @@ package de.frauas.dronesimulation.app.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.XMLFormatter;
+import java.io.IOException;
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 
 public class main {
+	private static final Logger LOG = Logger.getGlobal();
+	static {
+		Handler fileHandler;
+		Handler consoleHandler;
+		try {
+			fileHandler = new FileHandler("./Logs/mainLogFile.log");
+			LOG.addHandler(fileHandler);
+			Formatter xmlFormat = new XMLFormatter();
+			fileHandler.setFormatter(xmlFormat);
+			fileHandler.setLevel(Level.ALL);
+		} catch (IOException e) {
+			// Exception handling
+		}
+		consoleHandler = new ConsoleHandler();
+		LOG.addHandler(consoleHandler);
+		consoleHandler.setLevel(Level.WARNING);
+		Formatter consoleFormat = new SimpleFormatter();
+		consoleHandler.setFormatter(consoleFormat);
+	}
+
 	public static void main(String[] args) {
 		try {
 			ApiHandler droneApiHandler = new ApiHandler();
@@ -18,11 +47,11 @@ public class main {
 
 			int selectedDroneIndex = 1;
 
-			System.out.println("Size of drone list: " + listOfDrones.size());
-			System.out.println("Size of drone type list: " + listOfDroneTypes.size());
-			System.out.println("Done.");
+			LOG.info("Size of drone list: " + listOfDrones.size());
+			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
+			LOG.info("Done.");
 		} catch (Exception e) {
-			System.out.println("An error occurred: " + e.getMessage());
+			LOG.severe("An error occurred: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -31,10 +60,9 @@ public class main {
 		try {
 			droneApiHandler.fetchDroneList(0, 30, listOfDrones);
 		} catch (Exception e) {
-			System.out.println("An error occurred while Calling and creating the drone list: " + e.getMessage());
+			LOG.severe("An error occurred while Calling and creating the drone list: " + e.getMessage());
 			e.printStackTrace();
 			System.exit(1); // stop the application
-
 		}
 	}
 
@@ -58,10 +86,9 @@ public class main {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("An error occurred while creating drone type objects: " + e.getMessage());
+			LOG.severe("An error occurred while creating drone type objects: " + e.getMessage());
 			e.printStackTrace();
 			System.exit(1); // stop the application
-
 		}
 	}
 }
