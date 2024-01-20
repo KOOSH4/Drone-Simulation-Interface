@@ -27,21 +27,11 @@ public class ApiHandler {
     public static void main(String[] args) {
         System.out.println("parseJsonResponse started...");
 
-        // callDroneListAPI(10, 20, droneInstanceList); // offset , Limit
-
-        // String droneTypeApi = "http://dronesim.facets-labs.com/api/dronetypes/60/";
-        // // "http://dronesim.facets-labs.com/api/dronetypes/60/"
-        // callDroneTypeAPI(droneTypeApi);
-
-        // String droneDynamicsUri = "http://dronesim.facets-labs.com/api/drones/67/";
-        // // http://dronesim.facets-labs.com/api/drones/67/
-        // callDroneDynamics(droneDynamicsUri);
-
         System.out.println("Done.");
 
     }
 
-    public static void callDroneListAPI(int offset, int limit, List<DroneList> droneInstanceList) {
+    public static void fetchDroneList(int offset, int limit, List<DroneList> listOfDrones) {
         URL url;
         try {
             // Create a URL object with the endpoint URL, offset and limit as query
@@ -69,8 +59,8 @@ public class ApiHandler {
                 }
                 in.close(); // Close the BufferedReader
 
-                // Pass the <responseParse the JSON response and update the droneInstanceList
-                ParseDroneList.parseJsonResponse(response.toString(), droneInstanceList);
+                // Pass the <responseParse the JSON response and update the listOfDrones
+                ParseDroneList.parseJsonResponse(response.toString(), listOfDrones);
             } else {
                 System.out.println("GET request not worked"); // Print an error message if the response code is not
                                                               // HTTP_OK
@@ -80,7 +70,7 @@ public class ApiHandler {
         }
     }
 
-    public static void callDroneTypeAPI(DroneList drone) {
+    public static void fetchDroneType(DroneList drone) {
         URL url;
         String apiUri = drone.getDronetypeUri();
         try {
@@ -113,7 +103,7 @@ public class ApiHandler {
         }
     }
 
-    public void callDroneDynamics(DroneList drone, int offset) {
+    public void fetchDroneDynamics(DroneList drone, int offset) {
         URL url;
         try {
             // Create a URL object with the endpoint URL

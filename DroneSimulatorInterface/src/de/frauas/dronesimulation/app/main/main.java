@@ -29,7 +29,7 @@ public class main {
 
 	private static void populateDroneList(ApiHandler droneApiHandler, List<DroneList> listOfDrones) {
 		try {
-			droneApiHandler.callDroneListAPI(0, 30, listOfDrones);
+			droneApiHandler.fetchDroneList(0, 30, listOfDrones);
 		} catch (Exception e) {
 			System.out.println("An error occurred while Calling and creating the drone list: " + e.getMessage());
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class main {
 				}
 
 				if (!matchFound) {
-					droneApiHandler.callDroneTypeAPI(drone);
+					droneApiHandler.fetchDroneType(drone);
 					listOfDroneTypes.add(drone.getDroneType());
 				}
 			}
