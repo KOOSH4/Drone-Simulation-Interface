@@ -27,7 +27,7 @@ public class ApiHandler {
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code : " + responseCode);
+            // System.out.println("Response Code : " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -60,7 +60,7 @@ public class ApiHandler {
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code : " + responseCode);
+            // System.out.println("Response Code : " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -91,7 +91,7 @@ public class ApiHandler {
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code : " + responseCode);
+            // System.out.println("Response Code : " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
