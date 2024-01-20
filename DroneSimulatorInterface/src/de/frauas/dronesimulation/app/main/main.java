@@ -57,6 +57,10 @@ public class main {
 				drone.getDroneDynamics().printStatus();
 				System.out.println("###");
 			}
+
+			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
+			// call to refresh the data
+
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
 
@@ -101,5 +105,18 @@ public class main {
 			e.printStackTrace();
 			System.exit(1); // stop the application
 		}
+	}
+
+	public static void refreshData(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
+			List<DroneType> listOfDroneTypes, int minutesBefore) {
+		// Clear the existing lists
+		listOfDrones.clear();
+		listOfDroneTypes.clear();
+
+		// Fetch and create the objects again
+		populateDroneList(droneApiHandler, listOfDrones);
+		createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
+		Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore);
+		System.out.println("Refreshed the data!");
 	}
 }
