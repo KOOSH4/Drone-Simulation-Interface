@@ -33,6 +33,8 @@ public class main {
 		} catch (Exception e) {
 			System.out.println("An error occurred while Calling and creating the drone list: " + e.getMessage());
 			e.printStackTrace();
+			System.exit(1); // stop the application
+
 		}
 	}
 
@@ -58,6 +60,8 @@ public class main {
 		} catch (Exception e) {
 			System.out.println("An error occurred while creating drone type objects: " + e.getMessage());
 			e.printStackTrace();
+			System.exit(1); // stop the application
+
 		}
 	}
 }
