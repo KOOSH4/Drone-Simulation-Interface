@@ -8,33 +8,34 @@ import java.util.List;
 public class ParseDroneList {
 
     public static void parseJsonResponse(String input, List<DroneList> droneInstanceList) {
+        try {
+            // Create a JSONObject with the response
+            JSONObject wholeFile = new JSONObject(input);
 
-        // Create a JSONObject with the response
-        JSONObject wholeFile = new JSONObject(input);
+            // Get the "results" array from the JSONObject
+            JSONArray jsonFile = wholeFile.getJSONArray("results");
+            // Loop through the array
+            for (int i = 0; i < jsonFile.length(); i++) {
+                // Get each object in the array
+                JSONObject o = jsonFile.getJSONObject(i);
+                // If the object has "carriage_type" and "carriage_weight"
+                if (o.has("carriage_type") && o.has("carriage_weight")) {
+                    // Get the values of "carriage_type" and "carriage_weight"
+                    String carriageType = o.getString("carriage_type");
+                    int carriageWeight = o.getInt("carriage_weight");
+                    int id = o.getInt("id");
+                    ZonedDateTime created = ZonedDateTime.parse(o.getString("created"));
+                    String serialNumber = o.getString("serialnumber");
+                    String droneTypeUri = o.getString("dronetype");
 
-        // Get the "results" array from the JSONObject
-        JSONArray jsonFile = wholeFile.getJSONArray("results");
-        // Loop through the array
-        for (int i = 0; i < jsonFile.length(); i++) {
-            // Get each object in the array
-            JSONObject o = jsonFile.getJSONObject(i);
-            // If the object has "carriage_type" and "carriage_weight"
-            if (o.has("carriage_type") && o.has("carriage_weight")) {
-                // Get the values of "carriage_type" and "carriage_weight"
-                String carriageType = o.getString("carriage_type");
-                int carriageWeight = o.getInt("carriage_weight");
-                int id = o.getInt("id");
-                ZonedDateTime created = ZonedDateTime.parse(o.getString("created"));
-                String serialNumber = o.getString("serialnumber");
-                String droneTypeUri = o.getString("dronetype");
-
-                DroneList drone = new DroneList(id, droneTypeUri, created, serialNumber, carriageWeight,
-                        carriageType);
-                droneInstanceList.add(drone);
-
+                    DroneList drone = new DroneList(id, droneTypeUri, created, serialNumber, carriageWeight,
+                            carriageType);
+                    droneInstanceList.add(drone);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("An error occurred while parsing the drone list: " + e.getMessage());
+            e.printStackTrace();
         }
-
     }
-
 }
