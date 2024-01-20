@@ -27,7 +27,7 @@ public class ApiHandler {
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
-            // System.out.println("Response Code : " + responseCode);
+            System.out.println("Response Code : " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -38,7 +38,7 @@ public class ApiHandler {
                     response.append(inputLine);
                 }
                 in.close();
-
+                // System.out.println(response.toString());
                 ParseDroneList.parseJsonResponse(response.toString(), listOfDrones);
             } else {
                 System.out.println("GET request not worked");
@@ -82,7 +82,7 @@ public class ApiHandler {
         }
     }
 
-    public void fetchDroneDynamics(DroneList drone, int offset) {
+    public void fetchDroneDynamics(List<DroneList> listOfDrones, int offset) {
         try {
             URL url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + offset);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -103,7 +103,7 @@ public class ApiHandler {
                 }
                 in.close();
 
-                ParseDroneDynamics.parseJsonResponse(response.toString(), drone);
+                ParseDroneDynamics.parseJsonResponse(response.toString(), listOfDrones);
             } else {
                 System.out.println("GET request not worked");
             }

@@ -43,12 +43,23 @@ public class main {
 			List<DroneType> listOfDroneTypes = new ArrayList<>();
 
 			populateDroneList(droneApiHandler, listOfDrones);
+			System.out.println("size of drone list: " + listOfDrones.size());
 			createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
-
-			int selectedDroneIndex = 1;
-
+			System.out.println("size of drone type list: " + listOfDroneTypes.size());
+			int minutesBefore = 1440; // 1440 means current time and 0 means 24 hours before
+			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore);
+			int i = 0;
+			System.out.println("###");
+			for (DroneList drone : listOfDrones) {
+				System.out.println("Drone " + i++ + ":");
+				drone.printStatus();
+				drone.getDroneType().printStatus();
+				drone.getDroneDynamics().printStatus();
+				System.out.println("###");
+			}
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
+
 			LOG.info("Done.");
 		} catch (Exception e) {
 			LOG.severe("An error occurred: " + e.getMessage());

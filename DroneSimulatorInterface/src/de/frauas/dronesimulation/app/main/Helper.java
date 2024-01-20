@@ -6,11 +6,11 @@ import de.frauas.dronesimulation.app.dronelist.DroneList;
 
 public class Helper {
 
-	public static void getDroneDynamics(ApiHandler droneApiHandler, DroneList droneInstance, int minutesBefore) {
+	public static void getDroneDynamics(ApiHandler droneApiHandler, List<DroneList> listOfDrones, int minutesBefore) {
 		try {
 			int offset = 28800 - (minutesBefore * 20);
 			if (offset >= 0) {
-				droneApiHandler.fetchDroneDynamics(droneInstance, offset);
+				droneApiHandler.fetchDroneDynamics(listOfDrones, offset);
 			} else {
 				System.out.println("Invalid minutesBefore value. It should be less than or equal to 1440 (24 hours).");
 			}

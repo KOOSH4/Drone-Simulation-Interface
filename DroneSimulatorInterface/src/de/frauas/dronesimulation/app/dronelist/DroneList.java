@@ -16,6 +16,7 @@ public class DroneList {
     private int carriageWeight;
     private String carriageType;
     private List<DroneDynamics> droneDynamicsList; // To hold many DroneDynamics
+    private DroneDynamics droneDynamics; // To hold one DroneDynamics
 
     // Constructor
     public DroneList(int id /* , DroneType droneType */, String droneTypeUri, ZonedDateTime created,
@@ -29,7 +30,6 @@ public class DroneList {
         this.carriageWeight = carriageWeight;
         this.carriageType = carriageType;
         this.droneDynamicsList = new ArrayList<>(); // Initialize empty list for DroneDynamics
-
     }
 
     public DroneList() {
@@ -104,6 +104,14 @@ public class DroneList {
 
     public void setDroneDynamicsList(List<DroneDynamics> droneDynamicsList) {
         this.droneDynamicsList = droneDynamicsList;
+    }
+
+    public DroneDynamics getDroneDynamics() {
+        return droneDynamics;
+    }
+
+    public void setDroneDynamics(DroneDynamics droneDynamics) {
+        this.droneDynamics = droneDynamics;
     }
 
     public void printStatus() {

@@ -21,7 +21,6 @@ public class DroneDynamics {
     public DroneDynamics(String drone, ZonedDateTime timestamp, int speed, String alignRoll, String alignPitch,
             String alignYaw, String longitude, String latitude, int batteryStatus, ZonedDateTime lastSeen,
             String status, int batteryPercentage) {
-        super();
         this.drone = drone;
         this.timestamp = timestamp;
         this.speed = speed;
@@ -34,6 +33,7 @@ public class DroneDynamics {
         this.lastSeen = lastSeen;
         this.status = status;
         this.batteryPercentage = batteryPercentage;
+
     }
 
     public String getDrone() {
