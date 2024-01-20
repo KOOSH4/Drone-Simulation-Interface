@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class apihandler {
+public class ApiHandler {
 
     // Define constants for the user agent, endpoint URL, and token
     private static final String USER_AGENT = "MOzilla FIrefox Awesome version";

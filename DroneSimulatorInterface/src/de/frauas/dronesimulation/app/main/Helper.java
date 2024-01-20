@@ -1,12 +1,12 @@
 package de.frauas.dronesimulation.app.main;
 
 import java.util.List;
-import de.frauas.dronesimulation.app.apiconnection.apihandler; // Import the apihandler class
+import de.frauas.dronesimulation.app.apiconnection.ApiHandler; // Import the apihandler class
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 
 public class Helper {
 
-	public static void getDroneDynammics(apihandler apiHandler, DroneList droneInstance, int minutesBefore) {
+	public static void getDroneDynammics(ApiHandler apiHandler, DroneList droneInstance, int minutesBefore) {
 		int offset = 28800 - (minutesBefore * 20);
 		if (offset >= 0) {
 			apiHandler.callDroneDynamics(droneInstance, offset);
