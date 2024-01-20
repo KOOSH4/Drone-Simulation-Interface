@@ -3,6 +3,7 @@ package de.frauas.dronesimulation.app.apiconnection;
 import de.frauas.dronesimulation.app.dronedynamics.ParseDroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronelist.ParseDroneList;
+import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.dronetype.ParseDroneType;
 
 // Import necessary libraries
@@ -117,7 +118,7 @@ public class ApiHandler {
         try {
             // Create a URL object with the endpoint URL
 
-            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 20 + "&offset=" + offset);
+            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + offset);
             // Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             // Set the request properties

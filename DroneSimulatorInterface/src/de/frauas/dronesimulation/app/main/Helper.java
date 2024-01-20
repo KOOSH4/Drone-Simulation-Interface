@@ -6,7 +6,7 @@ import de.frauas.dronesimulation.app.dronelist.DroneList;
 
 public class Helper {
 
-	public static void getDroneDynammics(ApiHandler apiHandler, DroneList droneInstance, int minutesBefore) {
+	public static void getDroneDynamics(ApiHandler apiHandler, DroneList droneInstance, int minutesBefore) {
 		int offset = 28800 - (minutesBefore * 20);
 		if (offset >= 0) {
 			apiHandler.callDroneDynamics(droneInstance, offset);
@@ -15,11 +15,11 @@ public class Helper {
 		}
 	}
 
-	public static void printDroneDynamicsStatus(List<DroneList> droneInstanceList, int count) {
-		droneInstanceList.get(count).getDroneDynamicsList().get(0).printStatus();
+	public static void printDroneDynamicsStatus(List<DroneList> listOfDrones, int selectedDroneIndex) {
+		listOfDrones.get(selectedDroneIndex).getDroneDynamicsList().get(0).printStatus();
 	}
 
-	public static int payloadPercentage(DroneList droneInstance) {
+	public static int calculatePayloadPercentage(DroneList droneInstance) {
 		int payloadPercentage = (droneInstance.getCarriageWeight() * 100)
 				/ droneInstance.getDroneType().getMaxCarriage();
 		System.out.println("PAYLOAD PERCENTAGE: " + payloadPercentage);

@@ -9,6 +9,7 @@ public class DroneType {
     private int batteryCapacity;
     private int controlRange;
     private int maxCarriage;
+    String DroneTypeUri;
 
     public DroneType(int _typeId, String _manufacturer, String _typeName, int _weight, int _maxSpeed,
             int _batteryCapacity, int _controlRange, int _maxCarriage) {
@@ -20,6 +21,7 @@ public class DroneType {
         this.batteryCapacity = _batteryCapacity;
         this.controlRange = _controlRange;
         this.maxCarriage = _maxCarriage;
+        this.DroneTypeUri = "http://dronesim.facets-labs.com/api/dronetypes/" + _typeId + "/?format=json";
     }
     // Getters and setters for each field
 
@@ -85,6 +87,14 @@ public class DroneType {
 
     public void setMaxCarriage(int _maxCarriage) {
         this.maxCarriage = _maxCarriage;
+    }
+
+    public void setDroneTypeUri(String _DroneTypeUri) {
+        this.DroneTypeUri = _DroneTypeUri;
+    }
+
+    public String getDroneTypeUri() {
+        return DroneTypeUri;
     }
 
     public void printStatus() {
