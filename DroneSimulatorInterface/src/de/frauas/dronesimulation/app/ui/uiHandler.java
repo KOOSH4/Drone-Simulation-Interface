@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 //
 import java.awt.Dimension;
 
@@ -26,6 +29,33 @@ public class uiHandler extends JFrame {
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("Hello, Drone!");
 		JButton refreshButton = new JButton("Refresh");
+		// labels for drone list
+		JLabel labelId = new JLabel();
+		JLabel labelSerialnumber = new JLabel();
+		JLabel labelCarriageWeight = new JLabel();
+		JLabel labelCarriageType = new JLabel();
+		JLabel labelCreated = new JLabel();
+		// labels for drone type
+		JLabel labelManufacturer = new JLabel();
+		JLabel labelTypeId = new JLabel();
+		JLabel labelTypeName = new JLabel();
+		JLabel labelWeight = new JLabel();
+		JLabel labelMaxSpeed = new JLabel();
+		JLabel labelBatteryCapacity = new JLabel();
+		JLabel labelControlRange = new JLabel();
+		JLabel labelMaxCarriage = new JLabel();
+		// labels for drone dynamics
+		JLabel labelDDTimeStamp = new JLabel();
+		JLabel labelDDSpeed = new JLabel();
+		JLabel labelDDAlightRoll = new JLabel();
+		JLabel labelDDAlightPitch = new JLabel();
+		JLabel labelDDAlightYaw = new JLabel();
+		JLabel labelDDLongitute = new JLabel();
+		JLabel labelDDLatitude = new JLabel();
+		JLabel labelDDBatteryStatus = new JLabel();
+		JLabel labelDDLastSeen = new JLabel();
+		JLabel labelDDStatus = new JLabel();
+
 		String[] dronesArray = new String[listOfDrones.size()];
 		for (DroneList drone : listOfDrones) {
 			String droneTableInfos = "# " + drone.getId() + "    " + drone.getDroneType().getManufacturer();
@@ -33,19 +63,133 @@ public class uiHandler extends JFrame {
 			dronesArray[listOfDrones.indexOf(drone)] = droneTableInfos;
 			// System.out.println(drone.getSerialnumber().toString());
 		}
-
 		JList<String> DroneTable = new JList<>(dronesArray);
+
 		DroneTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		DroneTable.setVisibleRowCount(-1); // make all items visible
+
+		// to update the label with the selected drone
+		DroneTable.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					String selectedDrone = DroneTable.getSelectedValue();
+					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
+
+					// set text for Drone Type
+
+					String droneSerialnumber = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getSerialnumber());
+					labelId.setText("Drone ID: " + droneId);
+
+					labelSerialnumber.setText("Serialnumber: " + droneSerialnumber);
+
+					labelCarriageWeight.setText("Drone Carriage Weight: "
+							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageWeight()));
+
+					labelCarriageType.setText("Carriage Type: " + listOfDrones.get(DroneTable.getSelectedIndex())
+							.getCarriageType().toString());
+
+					labelCreated.setText("Created: "
+							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated()));
+
+					// set text for Drone Type
+
+					labelManufacturer.setText("Manufacturer: "
+							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType()
+									.getManufacturer()));
+
+					labelTypeId.setText("Type ID: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeId()));
+
+					labelTypeName.setText("Type Name: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()));
+
+					labelWeight.setText("Weight: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getWeight()));
+
+					labelMaxSpeed.setText("Max Speed: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMax_speed()));
+
+					labelBatteryCapacity.setText("Battery Capacity: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getBatterycapacity()));
+
+					labelControlRange.setText("Control Range: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getControlRange()));
+
+					labelMaxCarriage.setText("Max Carriage: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMaxCarriage()));
+
+					// set text for Drone Dynamics
+
+					labelDDTimeStamp.setText("Timestamp: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()));
+
+					labelDDSpeed.setText("Speed: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getSpeed()));
+
+					labelDDAlightRoll.setText("Alight Roll: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignRoll()));
+
+					labelDDAlightPitch.setText("Alight Pitch: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignPitch()));
+
+					labelDDAlightYaw.setText("Alight Yaw: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignYaw()));
+
+					labelDDLongitute.setText("Longitute: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLongitude()));
+
+					labelDDLatitude.setText("Latitude: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLatitude()));
+
+					labelDDBatteryStatus.setText("Battery Status: " + String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getBatteryStatus()));
+
+					labelDDLastSeen.setText("Last Seen: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()));
+
+					labelDDStatus.setText("Status: " + String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getStatus()));
+
+					// System.out.println(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
+				}
+			}
+		});
 
 		JScrollPane DroneTableScroller = new JScrollPane(DroneTable);
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
 
 		panel.add(DroneTableScroller);
-		panel.add(label);
 		panel.add(refreshButton);
 		panel.add(refreshButton);
+		// Lable Infos for drone List
+		panel.add(labelId);
+		panel.add(labelSerialnumber);
+		panel.add(labelCarriageWeight);
+		panel.add(labelCarriageType);
+		panel.add(labelCreated);
+		// Lable Infos for drone Type
+		panel.add(labelManufacturer);
+		panel.add(labelTypeId);
+		panel.add(labelTypeName);
+		panel.add(labelWeight);
+		panel.add(labelMaxSpeed);
+		panel.add(labelBatteryCapacity);
+		panel.add(labelControlRange);
+		panel.add(labelMaxCarriage);
+		// Lable Infos for drone Dynamics
+		panel.add(labelDDTimeStamp);
+		panel.add(labelDDSpeed);
+		panel.add(labelDDAlightRoll);
+		panel.add(labelDDAlightPitch);
+		panel.add(labelDDAlightYaw);
+		panel.add(labelDDLongitute);
+		panel.add(labelDDLatitude);
+		panel.add(labelDDBatteryStatus);
+		panel.add(labelDDLastSeen);
+		panel.add(labelDDStatus);
 
 		add(panel);
 	}
