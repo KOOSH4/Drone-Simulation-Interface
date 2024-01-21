@@ -16,7 +16,11 @@ import javax.swing.event.ListSelectionListener;
 
 //
 import java.awt.Dimension;
+//
+import java.awt.GridLayout;
 
+import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
+//
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 
 public class uiHandler extends JFrame {
@@ -30,12 +34,15 @@ public class uiHandler extends JFrame {
 		JLabel label = new JLabel("Hello, Drone!");
 		JButton refreshButton = new JButton("Refresh");
 		// labels for drone list
+		JLabel labelDroneListLable = new JLabel();
+
 		JLabel labelId = new JLabel();
 		JLabel labelSerialnumber = new JLabel();
 		JLabel labelCarriageWeight = new JLabel();
 		JLabel labelCarriageType = new JLabel();
 		JLabel labelCreated = new JLabel();
 		// labels for drone type
+		JLabel labelDroneTypeLable = new JLabel();
 		JLabel labelManufacturer = new JLabel();
 		JLabel labelTypeId = new JLabel();
 		JLabel labelTypeName = new JLabel();
@@ -45,6 +52,7 @@ public class uiHandler extends JFrame {
 		JLabel labelControlRange = new JLabel();
 		JLabel labelMaxCarriage = new JLabel();
 		// labels for drone dynamics
+		JLabel labelDroneDynamicLable = new JLabel();
 		JLabel labelDDTimeStamp = new JLabel();
 		JLabel labelDDSpeed = new JLabel();
 		JLabel labelDDAlightRoll = new JLabel();
@@ -74,6 +82,8 @@ public class uiHandler extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					String selectedDrone = DroneTable.getSelectedValue();
+					labelDroneListLable.setText("Drone Dynamic infos");
+
 					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 
 					// set text for Drone Type
@@ -94,6 +104,7 @@ public class uiHandler extends JFrame {
 							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated()));
 
 					// set text for Drone Type
+					labelDroneTypeLable.setText("Drone Type infos");
 
 					labelManufacturer.setText("Manufacturer: "
 							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType()
@@ -121,7 +132,7 @@ public class uiHandler extends JFrame {
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMaxCarriage()));
 
 					// set text for Drone Dynamics
-
+					labelDroneDynamicLable.setText("Drone Dynamic infos");
 					labelDDTimeStamp.setText("Timestamp: " + String.valueOf(
 							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()));
 
@@ -161,35 +172,76 @@ public class uiHandler extends JFrame {
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
 
+		panel.setLayout(new GridLayout(0, 3)); // Create a grid with 3 columns
+
 		panel.add(DroneTableScroller);
-		panel.add(refreshButton);
-		panel.add(refreshButton);
-		// Lable Infos for drone List
-		panel.add(labelId);
-		panel.add(labelSerialnumber);
-		panel.add(labelCarriageWeight);
-		panel.add(labelCarriageType);
-		panel.add(labelCreated);
-		// Lable Infos for drone Type
-		panel.add(labelManufacturer);
-		panel.add(labelTypeId);
-		panel.add(labelTypeName);
-		panel.add(labelWeight);
-		panel.add(labelMaxSpeed);
-		panel.add(labelBatteryCapacity);
-		panel.add(labelControlRange);
-		panel.add(labelMaxCarriage);
-		// Lable Infos for drone Dynamics
-		panel.add(labelDDTimeStamp);
-		panel.add(labelDDSpeed);
-		panel.add(labelDDAlightRoll);
-		panel.add(labelDDAlightPitch);
-		panel.add(labelDDAlightYaw);
-		panel.add(labelDDLongitute);
-		panel.add(labelDDLatitude);
-		panel.add(labelDDBatteryStatus);
-		panel.add(labelDDLastSeen);
-		panel.add(labelDDStatus);
+		// // panel.add(refreshButton);
+		// // Lable Infos for drone List
+		// panel.add(labelId);
+		// panel.add(labelSerialnumber);
+		// panel.add(labelCarriageWeight);
+		// panel.add(labelCarriageType);
+		// panel.add(labelCreated);
+		// // Lable Infos for drone Type
+		// panel.add(labelManufacturer);
+		// panel.add(labelTypeId);
+		// panel.add(labelTypeName);
+		// panel.add(labelWeight);
+		// panel.add(labelMaxSpeed);
+		// panel.add(labelBatteryCapacity);
+		// panel.add(labelControlRange);
+		// panel.add(labelMaxCarriage);
+		// // Lable Infos for drone Dynamics
+		// panel.add(labelDDTimeStamp);
+		// panel.add(labelDDSpeed);
+		// panel.add(labelDDAlightRoll);
+		// panel.add(labelDDAlightPitch);
+		// panel.add(labelDDAlightYaw);
+		// panel.add(labelDDLongitute);
+		// panel.add(labelDDLatitude);
+		// panel.add(labelDDBatteryStatus);
+		// panel.add(labelDDLastSeen);
+		// panel.add(labelDDStatus);
+
+		// Create a new panel for the drone list labels
+		JPanel droneListPanel = new JPanel(new GridLayout(0, 1)); // 1 column, as many rows as needed
+		droneListPanel.add(labelDroneListLable);
+		droneListPanel.add(labelId);
+		droneListPanel.add(labelSerialnumber);
+		droneListPanel.add(labelCarriageWeight);
+		droneListPanel.add(labelCarriageType);
+		droneListPanel.add(labelCreated);
+
+		// Create a new panel for the drone type labels
+		JPanel droneTypePanel = new JPanel(new GridLayout(0, 1)); // 1 column, as many rows as needed
+		droneTypePanel.add(labelDroneTypeLable);
+		droneTypePanel.add(labelManufacturer);
+		droneTypePanel.add(labelTypeId);
+		droneTypePanel.add(labelTypeName);
+		droneTypePanel.add(labelWeight);
+		droneTypePanel.add(labelMaxSpeed);
+		droneTypePanel.add(labelBatteryCapacity);
+		droneTypePanel.add(labelControlRange);
+		droneTypePanel.add(labelMaxCarriage);
+
+		// Create a new panel for the drone dynamics labels
+		JPanel droneDynamicsPanel = new JPanel(new GridLayout(0, 1)); // 1 column, as many rows as needed
+		droneDynamicsPanel.add(labelDroneDynamicLable);
+		droneDynamicsPanel.add(labelDDTimeStamp);
+		droneDynamicsPanel.add(labelDDSpeed);
+		droneDynamicsPanel.add(labelDDAlightRoll);
+		droneDynamicsPanel.add(labelDDAlightPitch);
+		droneDynamicsPanel.add(labelDDAlightYaw);
+		droneDynamicsPanel.add(labelDDLongitute);
+		droneDynamicsPanel.add(labelDDLatitude);
+		droneDynamicsPanel.add(labelDDBatteryStatus);
+		droneDynamicsPanel.add(labelDDLastSeen);
+		droneDynamicsPanel.add(labelDDStatus);
+
+		// Add the panels to the main panel
+		panel.add(droneListPanel);
+		panel.add(droneTypePanel);
+		panel.add(droneDynamicsPanel);
 
 		add(panel);
 	}
