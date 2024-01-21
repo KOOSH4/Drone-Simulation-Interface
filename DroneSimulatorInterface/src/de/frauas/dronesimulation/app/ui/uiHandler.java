@@ -20,7 +20,7 @@ public class uiHandler extends JFrame {
 
 	public uiHandler(List<DroneList> listOfDrones) {
 		setTitle("Drone Simulation Interface");
-		setSize(1300, 768);
+		setSize(1024, 768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
@@ -40,9 +40,11 @@ public class uiHandler extends JFrame {
 
 		JScrollPane DroneTableScroller = new JScrollPane(DroneTable);
 
-		DroneTableScroller.setPreferredSize(new Dimension(300, 200)); // Set your desired width and height
+		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
+
 		panel.add(DroneTableScroller);
 		panel.add(label);
+		panel.add(refreshButton);
 		panel.add(refreshButton);
 
 		add(panel);
