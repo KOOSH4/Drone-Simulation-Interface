@@ -1,5 +1,7 @@
 package de.frauas.dronesimulation.app.ui;
 
+import java.time.LocalTime;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -24,30 +26,35 @@ import java.awt.GridLayout;
 import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 //
 import de.frauas.dronesimulation.app.dronelist.DroneList;
+import de.frauas.dronesimulation.app.dronetype.DroneType;
 
 public class uiHandler extends JFrame {
 
-	public uiHandler(List<DroneList> listOfDrones) {
+	public uiHandler(List<DroneList> listOfDrones, List<DroneType> listOfDroneTypes) {
 		setTitle("Drone Simulation Interface");
 		setSize(1024, 768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
+
+		// labels for Option Panel
 		JButton refreshButton = new JButton("Refresh");
-
 		JButton aboutUsButton = new JButton("About Us");
-
 		JLabel labelLastUpdate = new JLabel();
+		JLabel labelDrones = new JLabel();
+		JLabel labelDroneTypes = new JLabel();
+		JLabel labelOnlineDrones = new JLabel();
+		JLabel labelCurrentTime = new JLabel();
 
-		// labels for drone list
+		// labels for drone list Panel
+
 		JLabel labelDroneListLable = new JLabel();
-
 		JLabel labelId = new JLabel();
 		JLabel labelSerialnumber = new JLabel();
 		JLabel labelCarriageWeight = new JLabel();
 		JLabel labelCarriageType = new JLabel();
 		JLabel labelCreated = new JLabel();
-		// labels for drone type
+		// labels for drone type panel
 		JLabel labelDroneTypeLable = new JLabel();
 		JLabel labelManufacturer = new JLabel();
 		JLabel labelTypeId = new JLabel();
@@ -57,7 +64,7 @@ public class uiHandler extends JFrame {
 		JLabel labelBatteryCapacity = new JLabel();
 		JLabel labelControlRange = new JLabel();
 		JLabel labelMaxCarriage = new JLabel();
-		// labels for drone dynamics
+		// labels for drone dynamics Panel
 		JLabel labelDroneDynamicLable = new JLabel();
 		JLabel labelDDTimeStamp = new JLabel();
 		JLabel labelDDSpeed = new JLabel();
@@ -98,92 +105,121 @@ public class uiHandler extends JFrame {
 				if (!e.getValueIsAdjusting()) {
 					String selectedDrone = DroneTable.getSelectedValue();
 					// 20
+
 					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
+					labelId.setText("Drone ID: " + droneId);
 
 					// set text for Drone Type
 
 					String droneSerialnumber = String
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getSerialnumber());
-					labelId.setText("Drone ID: " + droneId);
-
 					labelSerialnumber.setText("Serialnumber: " + droneSerialnumber);
 
-					labelCarriageWeight.setText("Drone Carriage Weight: "
-							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageWeight()));
+					int selectedIndex = DroneTable.getSelectedIndex();
 
-					labelCarriageType.setText("Carriage Type: " + listOfDrones.get(DroneTable.getSelectedIndex())
-							.getCarriageType().toString());
+					String droneCarriageWeight = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageWeight());
+					labelCarriageWeight.setText("Drone Carriage Weight: " + droneCarriageWeight);
 
-					labelCreated.setText("Created: "
-							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated()));
+					String droneCarriageType = listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType();
+					labelCarriageType.setText("Carriage Type: " + droneCarriageType);
+
+					String droneCreated = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated());
+					labelCreated.setText("Created: " + droneCreated);
 
 					// set text for Drone Type
 
-					labelManufacturer.setText("Manufacturer: "
-							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType()
-									.getManufacturer()));
+					String droneManufacturer = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getManufacturer());
+					labelManufacturer.setText("Manufacturer: " + droneManufacturer);
 
-					labelTypeId.setText("Type ID: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeId()));
+					String droneTypeId = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeId());
+					labelTypeId.setText("Type ID: " + droneTypeId);
 
-					labelTypeName.setText("Type Name: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()));
+					String droneTypeName = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName());
+					labelTypeName.setText("Type Name: " + droneTypeName);
 
-					labelWeight.setText("Weight: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getWeight()));
+					String droneWeight = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getWeight());
+					labelWeight.setText("Weight: " + droneWeight);
 
-					labelMaxSpeed.setText("Max Speed: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMax_speed()));
+					String droneMaxSpeed = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMax_speed());
+					labelMaxSpeed.setText("Max Speed: " + droneMaxSpeed);
 
-					labelBatteryCapacity.setText("Battery Capacity: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getBatterycapacity()));
+					String droneBatteryCapacity = String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getBatterycapacity());
+					labelBatteryCapacity.setText("Battery Capacity: " + droneBatteryCapacity);
 
-					labelControlRange.setText("Control Range: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getControlRange()));
+					String droneControlRange = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getControlRange());
+					labelControlRange.setText("Control Range: " + droneControlRange);
 
-					labelMaxCarriage.setText("Max Carriage: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMaxCarriage()));
+					String droneMaxCarriage = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMaxCarriage());
+					labelMaxCarriage.setText("Max Carriage: " + droneMaxCarriage);
 
 					// set text for Drone Dynamics
-					// size
 
-					labelDDTimeStamp.setText("Timestamp: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()));
+					String droneTimestamp = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp());
+					labelDDTimeStamp.setText("Timestamp: " + droneTimestamp);
 
-					labelDDSpeed.setText("Speed: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getSpeed()));
+					String droneSpeed = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getSpeed());
+					labelDDSpeed.setText("Speed: " + droneSpeed);
 
-					labelDDAlightRoll.setText("Alight Roll: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignRoll()));
+					String droneAlignRoll = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignRoll());
+					labelDDAlightRoll.setText("Alight Roll: " + droneAlignRoll);
 
-					labelDDAlightPitch.setText("Alight Pitch: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignPitch()));
+					String droneAlignPitch = String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignPitch());
+					labelDDAlightPitch.setText("Alight Pitch: " + droneAlignPitch);
 
-					labelDDAlightYaw.setText("Alight Yaw: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignYaw()));
+					String droneAlignYaw = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getAlignYaw());
+					labelDDAlightYaw.setText("Alight Yaw: " + droneAlignYaw);
 
-					labelDDLongitute.setText("Longitute: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLongitude()));
+					String droneLongitude = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLongitude());
+					labelDDLongitute.setText("Longitute: " + droneLongitude);
 
-					labelDDLatitude.setText("Latitude: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLatitude()));
+					String droneLatitude = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLatitude());
+					labelDDLatitude.setText("Latitude: " + droneLatitude);
 
-					labelDDBatteryStatus.setText("Battery Status: " + String.valueOf(
-							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getBatteryStatus()));
+					String droneBatteryStatus = String.valueOf(
+							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getBatteryStatus());
+					labelDDBatteryStatus.setText("Battery Status: " + droneBatteryStatus);
 
-					labelDDLastSeen.setText("Last Seen: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()));
+					String droneLastSeen = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen());
+					labelDDLastSeen.setText("Last Seen: " + droneLastSeen);
 
-					labelDDStatus.setText("Status: " + String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getStatus()));
-
+					String droneStatus = String
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getStatus());
+					labelDDStatus.setText("Status: " + droneStatus);
 					// System.out.println(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 				}
 			}
 		});
 		// current time as last update in dd/mm/yyyy hh:mm:ss format
 		labelLastUpdate.setText("Last Update: " + java.time.LocalDateTime.now().toString());
+		labelDroneTypes.setText("Total Drone Types: " + listOfDroneTypes.size());
+		labelDrones.setText("Total Drones: " + listOfDrones.size());
+		int OnlineDrones = 0;
+		for (DroneList drone : listOfDrones) {
+			if (drone.getDroneDynamics().getStatus().equals("ON")) {
+				labelOnlineDrones.setText("Online Drones: " + drone.getDroneDynamics().getStatus());
+				OnlineDrones++;
+			}
+		}
 
+		labelOnlineDrones.setText("Online Drones: " + OnlineDrones);
 		JScrollPane DroneTableScroller = new JScrollPane(DroneTable);
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
@@ -255,14 +291,14 @@ public class uiHandler extends JFrame {
 		droneDynamicsPanel.add(labelDDStatus);
 
 		JPanel OptionPanel = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
+		OptionPanel.add(labelDrones);
+		OptionPanel.add(labelDroneTypes);
+		OptionPanel.add(labelOnlineDrones);
+
+		OptionPanel.add(labelLastUpdate);
+
 		OptionPanel.add(refreshButton);
 		OptionPanel.add(aboutUsButton);
-		OptionPanel.add(labelLastUpdate);
-		JPanel OptionPanel2 = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
-		OptionPanel2.add(refreshButton);
-		OptionPanel2.add(aboutUsButton);
-		OptionPanel2.add(labelLastUpdate);
-		OptionPanel.add(OptionPanel2);
 
 		// Add the panels to the main panel
 		panel.add(droneListPanel);
@@ -271,6 +307,24 @@ public class uiHandler extends JFrame {
 		panel.add(OptionPanel);
 
 		add(panel);
+	}
+
+	public static void updateCurrentTime(String[] args) {
+		while (true) {
+			// Get the current time
+			LocalTime currentTime = LocalTime.now();
+
+			// Display the current time
+			System.out.println("Current Time: " + currentTime);
+
+			try {
+				// Pause the loop for one second
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }
