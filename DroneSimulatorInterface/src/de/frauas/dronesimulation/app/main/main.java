@@ -14,6 +14,7 @@ import java.io.IOException;
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
+import de.frauas.dronesimulation.app.ui.uiHandler;
 
 public class main {
 	private static final Logger LOG = Logger.getGlobal();
@@ -60,7 +61,8 @@ public class main {
 
 			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
 			// call to refresh the data
-
+			uiHandler droneUI = new uiHandler();
+			droneUI.setVisible(true);
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
 

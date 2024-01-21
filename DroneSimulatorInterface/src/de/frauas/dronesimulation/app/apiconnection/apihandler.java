@@ -17,7 +17,7 @@ public class ApiHandler {
     private static final String ENDPOINT_URL_DRONE_LIST = "https://dronesim.facets-labs.com/api/drones/?format=json";
     private static final String ENDPOINT_URL_DRONE_DYNAMICS = "https://dronesim.facets-labs.com/api/dronedynamics/?format=json";
     private static final String TOKEN = "Token 2ace84830f9ad2a039c6a6dda7b529bac48a71cd";
-
+//
     public static void fetchDroneList(int offset, int limit, List<DroneList> listOfDrones) {
         try {
             URL url = new URL(ENDPOINT_URL_DRONE_LIST + "&offset=" + offset + "&limit=" + limit);
