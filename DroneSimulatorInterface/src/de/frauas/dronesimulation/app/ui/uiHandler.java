@@ -15,6 +15,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 //
+import java.awt.Font;
+
 import java.awt.Dimension;
 //
 import java.awt.GridLayout;
@@ -31,8 +33,12 @@ public class uiHandler extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Hello, Drone!");
 		JButton refreshButton = new JButton("Refresh");
+
+		JButton aboutUsButton = new JButton("About Us");
+
+		JLabel labelLastUpdate = new JLabel();
+
 		// labels for drone list
 		JLabel labelDroneListLable = new JLabel();
 
@@ -76,14 +82,22 @@ public class uiHandler extends JFrame {
 		DroneTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		DroneTable.setVisibleRowCount(-1); // make all items visible
 
+		labelDroneListLable.setText("Drone Instance infos");
+		labelDroneListLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold, size
+
+		labelDroneTypeLable.setText("Drone Type infos");
+		labelDroneTypeLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold, size
+
+		labelDroneDynamicLable.setText("Drone Dynamic infos");
+		labelDroneDynamicLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold,
+
 		// to update the label with the selected drone
 		DroneTable.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					String selectedDrone = DroneTable.getSelectedValue();
-					labelDroneListLable.setText("Drone Dynamic infos");
-
+					// 20
 					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 
 					// set text for Drone Type
@@ -104,7 +118,6 @@ public class uiHandler extends JFrame {
 							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated()));
 
 					// set text for Drone Type
-					labelDroneTypeLable.setText("Drone Type infos");
 
 					labelManufacturer.setText("Manufacturer: "
 							+ String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType()
@@ -132,7 +145,8 @@ public class uiHandler extends JFrame {
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getMaxCarriage()));
 
 					// set text for Drone Dynamics
-					labelDroneDynamicLable.setText("Drone Dynamic infos");
+					// size
+
 					labelDDTimeStamp.setText("Timestamp: " + String.valueOf(
 							listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()));
 
@@ -167,6 +181,8 @@ public class uiHandler extends JFrame {
 				}
 			}
 		});
+		// current time as last update in dd/mm/yyyy hh:mm:ss format
+		labelLastUpdate.setText("Last Update: " + java.time.LocalDateTime.now().toString());
 
 		JScrollPane DroneTableScroller = new JScrollPane(DroneTable);
 
@@ -238,10 +254,21 @@ public class uiHandler extends JFrame {
 		droneDynamicsPanel.add(labelDDLastSeen);
 		droneDynamicsPanel.add(labelDDStatus);
 
+		JPanel OptionPanel = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
+		OptionPanel.add(refreshButton);
+		OptionPanel.add(aboutUsButton);
+		OptionPanel.add(labelLastUpdate);
+		JPanel OptionPanel2 = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
+		OptionPanel2.add(refreshButton);
+		OptionPanel2.add(aboutUsButton);
+		OptionPanel2.add(labelLastUpdate);
+		OptionPanel.add(OptionPanel2);
+
 		// Add the panels to the main panel
 		panel.add(droneListPanel);
 		panel.add(droneTypePanel);
 		panel.add(droneDynamicsPanel);
+		panel.add(OptionPanel);
 
 		add(panel);
 	}
