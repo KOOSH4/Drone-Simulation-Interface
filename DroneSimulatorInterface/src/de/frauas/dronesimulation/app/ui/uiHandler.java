@@ -118,6 +118,14 @@ public class uiHandler extends JFrame {
 				iconPath + "switch-off.png");
 		ImageIcon iconSwitchOn = new ImageIcon(
 				iconPath + "switch-on.png");
+		JLabel labelDroneIconCarriageType = new JLabel(iconDrone);
+		ImageIcon iconDroneSenAct = new ImageIcon(
+				iconPath + "droneGallery/droneACT.png");
+		ImageIcon iconDroneSenNot = new ImageIcon(
+				iconPath + "droneGallery/droneNOT.png");
+		ImageIcon iconDroneSenSen = new ImageIcon(
+				iconPath + "droneGallery/droneSEN.png");
+
 		JLabel labelDroneSwitchOn = new JLabel(iconSwitchOn);
 		ImageIcon iconEmpty1 = new ImageIcon(
 				iconPath + "empty.png");
@@ -281,6 +289,14 @@ public class uiHandler extends JFrame {
 						labelDroneBatteryIcon.setIcon(iconBattery100);
 					}
 
+					if (listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType().equals("NOT")) {
+						labelDroneIconCarriageType.setIcon(iconDroneSenNot);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType().equals("ACT")) {
+						labelDroneIconCarriageType.setIcon(iconDroneSenAct);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType().equals("SEN")) {
+						labelDroneIconCarriageType.setIcon(iconDroneSenSen);
+					}
+
 					// System.out.println(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 				}
 			}
@@ -392,6 +408,7 @@ public class uiHandler extends JFrame {
 		VisualPanel.add(labelDroneIcon);
 		VisualPanel.add(labelDroneBatteryIcon);
 		VisualPanel.add(labelDroneSwitchOn);
+		VisualPanel.add(labelDroneIconCarriageType);
 		VisualPanel.add(labelDroneEmpty1);
 		VisualPanel.add(labelDroneEmpty2);
 		VisualPanel.add(labelDroneEmpty3);
