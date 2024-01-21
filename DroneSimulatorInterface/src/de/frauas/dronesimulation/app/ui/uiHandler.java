@@ -1,5 +1,17 @@
 package de.frauas.dronesimulation.app.ui;
 
+//
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import javax.swing.SwingUtilities;
+//
 import java.time.LocalTime;
 
 import javax.swing.JFrame;
@@ -7,6 +19,7 @@ import javax.swing.JLabel;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 //
@@ -16,7 +29,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JOptionPane;
-
+//
+import javax.swing.ImageIcon;
+import java.net.URL;
 //
 import java.awt.Font;
 
@@ -39,6 +54,8 @@ public class uiHandler extends JFrame {
 		JPanel panel = new JPanel();
 
 		// labels for Option Panel
+		JLabel labelDroneOptionLable = new JLabel();
+
 		JButton refreshButton = new JButton("Refresh");
 		JButton aboutUsButton = new JButton("About Us");
 		JLabel labelLastUpdate = new JLabel();
@@ -77,6 +94,36 @@ public class uiHandler extends JFrame {
 		JLabel labelDDBatteryStatus = new JLabel();
 		JLabel labelDDLastSeen = new JLabel();
 		JLabel labelDDStatus = new JLabel();
+		JLabel labelDDBatteryPercentage = new JLabel();
+
+		// set Icons for drone lables
+		JLabel labelDroneVisualsLable = new JLabel();
+
+		String iconPath = "./DroneSimulatorInterface/src/de/frauas/dronesimulation/app/icons/";
+		ImageIcon iconDrone = new ImageIcon(
+				iconPath + "droneGallery/drone.png");
+		JLabel labelDroneIcon = new JLabel(iconDrone);
+		ImageIcon iconBattery0 = new ImageIcon(
+				iconPath + "battery0.png");
+		ImageIcon iconBattery25 = new ImageIcon(
+				iconPath + "battery25.png");
+		ImageIcon iconBattery50 = new ImageIcon(
+				iconPath + "battery50.png");
+		ImageIcon iconBattery75 = new ImageIcon(
+				iconPath + "battery75.png");
+		ImageIcon iconBattery100 = new ImageIcon(
+				iconPath + "battery100.png");
+		JLabel labelDroneBatteryIcon = new JLabel(iconBattery100);
+		ImageIcon iconSwitchOff = new ImageIcon(
+				iconPath + "switch-off.png");
+		ImageIcon iconSwitchOn = new ImageIcon(
+				iconPath + "switch-on.png");
+		JLabel labelDroneSwitchOn = new JLabel(iconSwitchOn);
+		ImageIcon iconEmpty1 = new ImageIcon(
+				iconPath + "empty.png");
+		JLabel labelDroneEmpty1 = new JLabel(iconEmpty1);
+		JLabel labelDroneEmpty2 = new JLabel(iconEmpty1);
+		JLabel labelDroneEmpty3 = new JLabel(iconEmpty1);
 
 		String[] dronesArray = new String[listOfDrones.size()];
 		for (DroneList drone : listOfDrones) {
@@ -98,6 +145,12 @@ public class uiHandler extends JFrame {
 
 		labelDroneDynamicLable.setText("Drone Dynamic infos");
 		labelDroneDynamicLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold,
+
+		labelDroneOptionLable.setText("Drone Option infos");
+		labelDroneOptionLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold,
+
+		labelDroneVisualsLable.setText("Drone Visuals");
+		labelDroneVisualsLable.setFont(new Font("Arial", Font.BOLD, 20)); // Set the font to Arial, bold,
 
 		// to update the label with the selected drone
 		DroneTable.addListSelectionListener(new ListSelectionListener() {
@@ -204,6 +257,30 @@ public class uiHandler extends JFrame {
 					String droneStatus = String
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getStatus());
 					labelDDStatus.setText("Status: " + droneStatus);
+
+					if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getStatus().equals("ON")) {
+						labelDroneSwitchOn.setIcon(iconSwitchOn);
+					} else {
+						labelDroneSwitchOn.setIcon(iconSwitchOff);
+					}
+
+					int batteryPercentage = (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics()
+							.getBatteryStatus() * 100)
+							/ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getBatterycapacity();
+
+					labelDDBatteryPercentage.setText("Battery Percentage: " + batteryPercentage + "%");
+					if (batteryPercentage >= 0 && batteryPercentage <= 25) {
+						labelDroneBatteryIcon.setIcon(iconBattery0);
+					} else if (batteryPercentage > 25 && batteryPercentage <= 50) {
+						labelDroneBatteryIcon.setIcon(iconBattery25);
+					} else if (batteryPercentage > 50 && batteryPercentage <= 75) {
+						labelDroneBatteryIcon.setIcon(iconBattery50);
+					} else if (batteryPercentage > 75 && batteryPercentage <= 100) {
+						labelDroneBatteryIcon.setIcon(iconBattery75);
+					} else if (batteryPercentage > 100) {
+						labelDroneBatteryIcon.setIcon(iconBattery100);
+					}
+
 					// System.out.println(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 				}
 			}
@@ -292,10 +369,13 @@ public class uiHandler extends JFrame {
 		droneDynamicsPanel.add(labelDDLongitute);
 		droneDynamicsPanel.add(labelDDLatitude);
 		droneDynamicsPanel.add(labelDDBatteryStatus);
+		droneDynamicsPanel.add(labelDDBatteryPercentage);
 		droneDynamicsPanel.add(labelDDLastSeen);
 		droneDynamicsPanel.add(labelDDStatus);
+		// a panel for the drone Option labels
 
 		JPanel OptionPanel = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
+
 		OptionPanel.add(labelDrones);
 		OptionPanel.add(labelDroneTypes);
 		OptionPanel.add(labelOnlineDrones);
@@ -305,11 +385,23 @@ public class uiHandler extends JFrame {
 		OptionPanel.add(refreshButton);
 		OptionPanel.add(aboutUsButton);
 
+		// a panel for the Visual labels
+
+		JPanel VisualPanel = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
+
+		VisualPanel.add(labelDroneIcon);
+		VisualPanel.add(labelDroneBatteryIcon);
+		VisualPanel.add(labelDroneSwitchOn);
+		VisualPanel.add(labelDroneEmpty1);
+		VisualPanel.add(labelDroneEmpty2);
+		VisualPanel.add(labelDroneEmpty3);
+
 		// Add the panels to the main panel
 		panel.add(droneListPanel);
 		panel.add(droneTypePanel);
 		panel.add(droneDynamicsPanel);
 		panel.add(OptionPanel);
+		panel.add(VisualPanel);
 
 		add(panel);
 	}
