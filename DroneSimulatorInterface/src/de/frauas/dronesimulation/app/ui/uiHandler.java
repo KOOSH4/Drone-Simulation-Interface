@@ -133,6 +133,38 @@ public class uiHandler extends JFrame {
 		JLabel labelDroneEmpty2 = new JLabel(iconEmpty1);
 		JLabel labelDroneEmpty3 = new JLabel(iconEmpty1);
 
+		// Drone Gallery Icons
+
+		ImageIcon iconDroneGalleryAA108 = new ImageIcon(
+				iconPath + "droneGallery/AA108.png");
+		ImageIcon iconDroneGalleryChromaCameraDrone = new ImageIcon(
+				iconPath + "droneGallery/Chroma Camera Drone.png");
+		ImageIcon iconDroneGalleryD80 = new ImageIcon(
+				iconPath + "droneGallery/D80.png");
+		ImageIcon iconDroneGalleryEvoII = new ImageIcon(
+				iconPath + "droneGallery/Evo II.png");
+		ImageIcon iconDroneGalleryF24Pro = new ImageIcon(
+				iconPath + "droneGallery/F24 Pro.png");
+		ImageIcon iconDroneGalleryHS100 = new ImageIcon(
+				iconPath + "droneGallery/HS100.png");
+		ImageIcon iconDroneGalleryKarma = new ImageIcon(
+				iconPath + "droneGallery/Karma.png");
+		ImageIcon iconDroneGalleryPowerEggX = new ImageIcon(
+				iconPath + "droneGallery/PowerEgg X.png");
+		ImageIcon iconDroneGalleryS5C = new ImageIcon(
+				iconPath + "droneGallery/S5C.png");
+		ImageIcon iconDroneGallerySkydio2 = new ImageIcon(
+				iconPath + "droneGallery/Skydio 2.png");
+		ImageIcon iconDroneGalleryTello = new ImageIcon(
+				iconPath + "droneGallery/Tello.png");
+		ImageIcon iconDroneGalleryTyphoonHPro = new ImageIcon(
+				iconPath + "droneGallery/Typhoon H Pro.png");
+		ImageIcon iconDroneGalleryVoyager4 = new ImageIcon(
+				iconPath + "droneGallery/Voyager 4.png");
+		ImageIcon iconDroneGalleryX4H107D = new ImageIcon(
+				iconPath + "droneGallery/X4 H107D.png");
+		ImageIcon iconDroneGalleryX5C = new ImageIcon(
+				iconPath + "droneGallery/X5C.png");
 		String[] dronesArray = new String[listOfDrones.size()];
 		for (DroneList drone : listOfDrones) {
 			String droneTableInfos = "# " + drone.getId() + "    " + drone.getDroneType().getManufacturer();
@@ -287,6 +319,53 @@ public class uiHandler extends JFrame {
 						labelDroneBatteryIcon.setIcon(iconBattery75);
 					} else if (batteryPercentage > 100) {
 						labelDroneBatteryIcon.setIcon(iconBattery100);
+					}
+
+					if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("AA108")) {
+						labelDroneIcon.setIcon(iconDroneGalleryAA108);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Chroma Camera Drone")) {
+						labelDroneIcon.setIcon(iconDroneGalleryChromaCameraDrone);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("D80")) {
+						labelDroneIcon.setIcon(iconDroneGalleryD80);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Evo II")) {
+						labelDroneIcon.setIcon(iconDroneGalleryEvoII);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("F24 Pro")) {
+						labelDroneIcon.setIcon(iconDroneGalleryF24Pro);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("HS100")) {
+						labelDroneIcon.setIcon(iconDroneGalleryHS100);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Karma")) {
+						labelDroneIcon.setIcon(iconDroneGalleryKarma);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("PowerEgg X")) {
+						labelDroneIcon.setIcon(iconDroneGalleryPowerEggX);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("S5C")) {
+						labelDroneIcon.setIcon(iconDroneGalleryS5C);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Skydio 2")) {
+						labelDroneIcon.setIcon(iconDroneGallerySkydio2);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Tello")) {
+						labelDroneIcon.setIcon(iconDroneGalleryTello);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Typhoon H Pro")) {
+						labelDroneIcon.setIcon(iconDroneGalleryTyphoonHPro);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("Voyager 4")) {
+						labelDroneIcon.setIcon(iconDroneGalleryVoyager4);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("X4 H107D")) {
+						labelDroneIcon.setIcon(iconDroneGalleryX4H107D);
+					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getTypeName()
+							.equals("X5C")) {
+						labelDroneIcon.setIcon(iconDroneGalleryX5C);
 					}
 
 					if (listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType().equals("NOT")) {
