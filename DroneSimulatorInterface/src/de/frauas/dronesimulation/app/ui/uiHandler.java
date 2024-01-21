@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.JOptionPane;
 
 //
 import java.awt.Font;
@@ -218,9 +219,13 @@ public class uiHandler extends JFrame {
 				OnlineDrones++;
 			}
 		}
-
+		// shows Current Time in a label
 		labelOnlineDrones.setText("Online Drones: " + OnlineDrones);
 		JScrollPane DroneTableScroller = new JScrollPane(DroneTable);
+		// to open a dialog box with the about us information
+		aboutUsButton.addActionListener(e -> JOptionPane.showMessageDialog(null,
+				"Drone Simulation Interface" + "\n" + "Version 1.0" + "\n" + "Developed by:" + "\n"
+						+ "Koosha and Tara" + "\n" + ""));
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
 
