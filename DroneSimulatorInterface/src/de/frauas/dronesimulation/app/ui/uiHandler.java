@@ -28,8 +28,9 @@ public class uiHandler extends JFrame {
 		JButton refreshButton = new JButton("Refresh");
 		String[] dronesArray = new String[listOfDrones.size()];
 		for (DroneList drone : listOfDrones) {
-
-			dronesArray[listOfDrones.indexOf(drone)] = drone.getDroneType().getManufacturer();
+			String droneTableInfos = "# " + drone.getId() + "    " + drone.getDroneType().getManufacturer();
+			// System.out.println(droneTableInfos);
+			dronesArray[listOfDrones.indexOf(drone)] = droneTableInfos;
 			// System.out.println(drone.getSerialnumber().toString());
 		}
 
