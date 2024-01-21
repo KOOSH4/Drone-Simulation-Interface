@@ -61,7 +61,7 @@ public class main {
 
 			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
 			// call to refresh the data
-			uiHandler droneUI = new uiHandler();
+			uiHandler droneUI = new uiHandler(listOfDrones);
 			droneUI.setVisible(true);
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
