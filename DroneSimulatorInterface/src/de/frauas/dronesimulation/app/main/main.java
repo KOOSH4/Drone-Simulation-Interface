@@ -51,13 +51,13 @@ public class main {
 			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore);
 			int i = 0;
 			System.out.println("###");
-			for (DroneList drone : listOfDrones) {
-				System.out.println("Drone " + i++ + ":");
-				drone.printStatus();
-				drone.getDroneType().printStatus();
-				drone.getDroneDynamics().printStatus();
-				System.out.println("###");
-			}
+			// for (DroneList drone : listOfDrones) {
+			// System.out.println("Drone " + i++ + ":");
+			// drone.printStatus();
+			// drone.getDroneType().printStatus();
+			// drone.getDroneDynamics().printStatus();
+			// System.out.println("###");
+			// }
 
 			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
 			// call to refresh the data

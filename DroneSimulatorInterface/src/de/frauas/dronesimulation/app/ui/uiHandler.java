@@ -99,7 +99,7 @@ public class uiHandler extends JFrame {
 		// set Icons for drone lables
 		JLabel labelDroneVisualsLable = new JLabel();
 
-		String iconPath = "./DroneSimulatorInterface/src/de/frauas/dronesimulation/app/icons/";
+		String iconPath = "./Drone-Simulation-Interface/DroneSimulatorInterface/src/de/frauas/dronesimulation/app/icons/";
 		ImageIcon iconDrone = new ImageIcon(
 				iconPath + "droneGallery/drone.png");
 		JLabel labelDroneIcon = new JLabel(iconDrone);
@@ -114,8 +114,8 @@ public class uiHandler extends JFrame {
 		ImageIcon iconBattery100 = new ImageIcon(
 				iconPath + "battery100.png");
 		JLabel labelDroneBatteryIcon = new JLabel(iconBattery100);
-		ImageIcon iconSwitchOff = new ImageIcon(
-				iconPath + "switch-off.png");
+		ImageIcon iconSwitchOff = new ImageIcon(iconPath +
+				"switch-off.png");
 		ImageIcon iconSwitchOn = new ImageIcon(
 				iconPath + "switch-on.png");
 		JLabel labelDroneIconCarriageType = new JLabel(iconDrone);
@@ -375,6 +375,7 @@ public class uiHandler extends JFrame {
 					} else if (listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageType().equals("SEN")) {
 						labelDroneIconCarriageType.setIcon(iconDroneSenSen);
 					}
+					// System.out.println(labelDroneIcon.getIcon().toString());
 
 					// System.out.println(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 				}
