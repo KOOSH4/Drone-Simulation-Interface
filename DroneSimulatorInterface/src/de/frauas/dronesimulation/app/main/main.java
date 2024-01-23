@@ -11,7 +11,16 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
+import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.ui.uiHandler;
@@ -42,15 +51,17 @@ public class main {
 			ApiHandler droneApiHandler = new ApiHandler();
 			List<DroneList> listOfDrones = new ArrayList<>();
 			List<DroneType> listOfDroneTypes = new ArrayList<>();
-
+			List<DroneDynamics> listOfDronesDynamicTimeStamp = new ArrayList<>();
 			populateDroneList(droneApiHandler, listOfDrones);
 			System.out.println("size of drone list: " + listOfDrones.size());
 			createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
 			System.out.println("size of drone type list: " + listOfDroneTypes.size());
-			int minutesBefore = 250; // 1440 means current time and 0 means 24 hours before
-			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore);
-			int i = 0;
-			System.out.println("###");
+
+			// int minutesBefore = 250; // 1440 means current time and 0 means 24 hours
+			// before
+			int minutesBefore = 1440; // 1440 means current time and 0 means 24 hours before
+
+			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
 			// for (DroneList drone : listOfDrones) {
 			// System.out.println("Drone " + i++ + ":");
 			// drone.printStatus();
@@ -61,7 +72,17 @@ public class main {
 
 			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
 			// call to refresh the data
-			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes);
+			// System.out.println("size of listOfDronesDynamicTimeStamp list: " +
+			// listOfDronesDynamicTimeStamp.size());
+			// System.out.println("size of listOfDrones list: " +
+			// listOfDronesDynamicTimeStamp.get(0).getTimestamp());
+			// System.out.println("size of listOfDrones list: " +
+			// listOfDronesDynamicTimeStamp.get(1).getTimestamp());
+
+			// Swap the dates if needed
+
+			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes, droneApiHandler, minutesBefore,
+					listOfDronesDynamicTimeStamp);
 			droneUI.setVisible(true);
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
@@ -110,7 +131,7 @@ public class main {
 	}
 
 	public static void refreshData(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
-			List<DroneType> listOfDroneTypes, int minutesBefore) {
+			List<DroneType> listOfDroneTypes, int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
 		// Clear the existing lists
 		listOfDrones.clear();
 		listOfDroneTypes.clear();
@@ -118,7 +139,8 @@ public class main {
 		// Fetch and create the objects again
 		populateDroneList(droneApiHandler, listOfDrones);
 		createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
-		Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore);
+		Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
 		System.out.println("Refreshed the data!");
 	}
+
 }

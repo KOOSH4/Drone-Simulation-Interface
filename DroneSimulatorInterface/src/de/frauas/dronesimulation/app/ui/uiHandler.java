@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.Dimension;
 //
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
+import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 //
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
@@ -29,7 +30,7 @@ import de.frauas.dronesimulation.app.dronetype.DroneType;
 public class uiHandler extends JFrame {
 
 	public uiHandler(List<DroneList> listOfDrones, List<DroneType> listOfDroneTypes, ApiHandler droneApiHandler,
-			int minutesBefore) {
+			int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
 		setTitle("Drone Simulation Interface");
 		setSize(1024, 768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
