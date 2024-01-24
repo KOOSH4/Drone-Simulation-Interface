@@ -36,7 +36,7 @@ public class ApiHandler {
         Handler consoleHandler;
         try {
             // File handler for logging to a file
-            fileHandler = new FileHandler("./Logs/APIHandlerLogFile.log");
+            fileHandler = new FileHandler("./Logs/APILogFile.log");
             // Add the file handler to the logger
             LOG.addHandler(fileHandler);
             // Set the formatter for the file handler to XML
