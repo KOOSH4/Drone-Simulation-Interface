@@ -21,7 +21,7 @@ public class ParseDroneList {
             fileHandler.setLevel(Level.ALL);
         } catch (Exception e) {
             // Exception handling
-            LOG.log(Level.SEVERE, "Error occur in FileHandler.", e);
+            LOG.log(Level.WARNING, "Error occur in FileHandler.", e);
         }
 
         // Console handler for logging to the console
@@ -59,7 +59,7 @@ public class ParseDroneList {
                 }
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE, "An error occurred while parsing the drone list: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while parsing the drone list: " + e.getMessage(), e);
         }
     }
 }
