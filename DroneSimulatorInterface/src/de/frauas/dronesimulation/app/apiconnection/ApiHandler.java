@@ -36,7 +36,7 @@ public class ApiHandler {
         Handler consoleHandler;
         try {
             // File handler for logging to a file
-            fileHandler = new FileHandler("./Logs/APILogFile.log");
+            fileHandler = new FileHandler("./APILogFile.log");
             // Add the file handler to the logger
             LOG.addHandler(fileHandler);
             // Set the formatter for the file handler to XML
@@ -97,7 +97,7 @@ public class ApiHandler {
             }
         } catch (Exception e) {
             // Log any exceptions that occur
-            LOG.log(Level.SEVERE, "An error occurred while fetching the drone list: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while fetching the drone list: " + e.getMessage(), e);
             // Stop the application
             System.exit(1);
         }
@@ -139,7 +139,7 @@ public class ApiHandler {
             }
         } catch (Exception e) {
             // Log any exceptions that occur
-            LOG.log(Level.SEVERE, "An error occurred while fetching the drone type: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while fetching the drone type: " + e.getMessage(), e);
             // Stop the application
             System.exit(1);
         }
@@ -218,7 +218,7 @@ public class ApiHandler {
             }
         } catch (Exception e) {
             // Log any exceptions that occur
-            LOG.log(Level.SEVERE, "An error occurred while fetching the drone dynamics: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while fetching the drone dynamics: " + e.getMessage(), e);
             // Stop the application
             System.exit(1);
         }

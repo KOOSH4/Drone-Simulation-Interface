@@ -14,7 +14,7 @@ public class ParseDroneList {
         Handler consoleHandler;
         try {
             // File handler for logging to a file
-            fileHandler = new FileHandler("./Logs/ParseDroneListLogFile.log");
+            fileHandler = new FileHandler("./ParseDroneListLogFile.log");
             LOG.addHandler(fileHandler);
             Formatter xmlFormat = new XMLFormatter();
             fileHandler.setFormatter(xmlFormat);

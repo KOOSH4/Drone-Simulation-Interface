@@ -13,7 +13,7 @@ public class ParseDroneType {
         Handler consoleHandler;
         try {
             // File handler for logging to a file
-            fileHandler = new FileHandler("./Logs/ParseDroneTypeLogFile.log");
+            fileHandler = new FileHandler("./ParseDroneTypeLogFile.log");
             // Add the file handler to the logger
             LOG.addHandler(fileHandler);
             // Set the formatter for the file handler to XML
