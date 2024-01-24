@@ -3,7 +3,6 @@ package de.frauas.dronesimulation.app.dronedynamics;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class DroneDynamics {
     private String drone;
