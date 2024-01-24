@@ -1,7 +1,6 @@
 package de.frauas.dronesimulation.app.dronedynamics;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,18 +16,19 @@ public class DroneDynamics {
     private String latitude;
     private int batteryStatus;
     private int batteryPercentage;
-
     private LocalDateTime lastSeen;
     private String status;
 
+    // Constructor for DroneDynamics class
     public DroneDynamics(String _drone, String _timestamp, int _speed, String _alignRoll, String _alignPitch,
             String _alignYaw, String _longitude, String _latitude, int _batteryStatus, String _lastSeen,
             String _status, int _batteryPercentage) {
+        // Initialize drone URI
         this.drone = _drone;
+        // Initialize and format timestamp
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
         ZonedDateTime zonedDateTime = ZonedDateTime.parse(_timestamp.toString(), formatter);
         this.timestamp = zonedDateTime.toLocalDateTime();
-        // System.out.println("timestamp: " + timestamp.getHour());
         this.speed = _speed;
         this.alignRoll = _alignRoll;
         this.alignPitch = _alignPitch;
@@ -36,12 +36,11 @@ public class DroneDynamics {
         this.longitude = _longitude;
         this.latitude = _latitude;
         this.batteryStatus = _batteryStatus;
-        // this.lastSeen = _lastSeen;
+        // Initialize and format last seen timestamp
         zonedDateTime = ZonedDateTime.parse(_lastSeen.toString(), formatter);
         this.lastSeen = zonedDateTime.toLocalDateTime();
         this.status = _status;
-        this.batteryPercentage = batteryPercentage;
-
+        this.batteryPercentage = _batteryPercentage;
     }
 
     public String getDrone() {
