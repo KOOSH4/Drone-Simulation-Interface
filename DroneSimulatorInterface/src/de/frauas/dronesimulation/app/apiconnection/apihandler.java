@@ -1,5 +1,6 @@
 package de.frauas.dronesimulation.app.apiconnection;
 
+import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronedynamics.ParseDroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronelist.ParseDroneList;
@@ -18,6 +19,7 @@ public class ApiHandler {
     private static final String ENDPOINT_URL_DRONE_DYNAMICS = "https://dronesim.facets-labs.com/api/dronedynamics/?format=json";
     private static final String TOKEN = "Token 2ace84830f9ad2a039c6a6dda7b529bac48a71cd";
 
+    //
     public static void fetchDroneList(int offset, int limit, List<DroneList> listOfDrones) {
         try {
             URL url = new URL(ENDPOINT_URL_DRONE_LIST + "&offset=" + offset + "&limit=" + limit);
@@ -82,7 +84,8 @@ public class ApiHandler {
         }
     }
 
-    public void fetchDroneDynamics(List<DroneList> listOfDrones, int offset) {
+    public void fetchDroneDynamics(List<DroneList> listOfDrones, int offset,
+            List<DroneDynamics> listOfDronesDynamicTimeStamp) {
         try {
             URL url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + offset);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -103,7 +106,31 @@ public class ApiHandler {
                 }
                 in.close();
 
-                ParseDroneDynamics.parseJsonResponse(response.toString(), listOfDrones);
+                ParseDroneDynamics.parseJsonResponse(response.toString(), listOfDrones, listOfDronesDynamicTimeStamp);
+            } else {
+                System.out.println("GET request not worked");
+            }
+
+            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + 0);
+            HttpURLConnection connection1 = (HttpURLConnection) url.openConnection();
+            connection1.setRequestProperty("Authorization", TOKEN);
+            connection1.setRequestProperty("User-Agent", USER_AGENT);
+            connection1.setRequestMethod("GET");
+
+            responseCode = connection1.getResponseCode();
+            // System.out.println("Response Code : " + responseCode);
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                System.out.println(response.toString());
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                ParseDroneDynamics.parseJsonResponseForDate(response.toString(), listOfDronesDynamicTimeStamp);
             } else {
                 System.out.println("GET request not worked");
             }

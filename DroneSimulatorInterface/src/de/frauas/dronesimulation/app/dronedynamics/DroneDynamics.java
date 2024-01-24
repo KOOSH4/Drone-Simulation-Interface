@@ -1,10 +1,14 @@
 package de.frauas.dronesimulation.app.dronedynamics;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DroneDynamics {
     private String drone;
-    private ZonedDateTime timestamp;
+    private LocalDateTime timestamp;
     private int speed;
     private String alignRoll;
     private String alignPitch;
@@ -15,23 +19,28 @@ public class DroneDynamics {
     private int batteryPercentage;
     private int carriage;
 
-    private ZonedDateTime lastSeen;
+    private LocalDateTime lastSeen;
     private String status;
 
-    public DroneDynamics(String drone, ZonedDateTime timestamp, int speed, String alignRoll, String alignPitch,
-            String alignYaw, String longitude, String latitude, int batteryStatus, ZonedDateTime lastSeen,
-            String status, int batteryPercentage) {
-        this.drone = drone;
-        this.timestamp = timestamp;
-        this.speed = speed;
-        this.alignRoll = alignRoll;
-        this.alignPitch = alignPitch;
-        this.alignYaw = alignYaw;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.batteryStatus = batteryStatus;
-        this.lastSeen = lastSeen;
-        this.status = status;
+    public DroneDynamics(String _drone, String _timestamp, int _speed, String _alignRoll, String _alignPitch,
+            String _alignYaw, String _longitude, String _latitude, int _batteryStatus, String _lastSeen,
+            String _status, int _batteryPercentage) {
+        this.drone = _drone;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(_timestamp.toString(), formatter);
+        this.timestamp = zonedDateTime.toLocalDateTime();
+        // System.out.println("timestamp: " + timestamp.getHour());
+        this.speed = _speed;
+        this.alignRoll = _alignRoll;
+        this.alignPitch = _alignPitch;
+        this.alignYaw = _alignYaw;
+        this.longitude = _longitude;
+        this.latitude = _latitude;
+        this.batteryStatus = _batteryStatus;
+        // this.lastSeen = _lastSeen;
+        zonedDateTime = ZonedDateTime.parse(_lastSeen.toString(), formatter);
+        this.lastSeen = zonedDateTime.toLocalDateTime();
+        this.status = _status;
         this.batteryPercentage = batteryPercentage;
 
     }
@@ -44,11 +53,11 @@ public class DroneDynamics {
         this.drone = drone;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -108,11 +117,11 @@ public class DroneDynamics {
         this.batteryStatus = batteryStatus;
     }
 
-    public ZonedDateTime getLastSeen() {
+    public LocalDateTime getLastSeen() {
         return lastSeen;
     }
 
-    public void setLastSeen(ZonedDateTime lastSeen) {
+    public void setLastSeen(LocalDateTime lastSeen) {
         this.lastSeen = lastSeen;
     }
 
