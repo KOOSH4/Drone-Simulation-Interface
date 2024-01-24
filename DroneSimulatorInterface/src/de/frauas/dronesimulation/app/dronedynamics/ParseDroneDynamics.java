@@ -15,14 +15,14 @@ public class ParseDroneDynamics {
         Handler consoleHandler;
         try {
             // Creating a file handler to write log to a file
-            fileHandler = new FileHandler("./Logs/ParseDynamicsLogFile.log");
+            fileHandler = new FileHandler("./ParseDynamicsLogFile.log");
             LOG.addHandler(fileHandler);
             Formatter xmlFormat = new XMLFormatter();
             fileHandler.setFormatter(xmlFormat);
             fileHandler.setLevel(Level.ALL);
         } catch (IOException e) {
             // Log any IO exceptions
-            LOG.log(Level.SEVERE, "Error occur in FileHandler.", e);
+            LOG.log(Level.WARNING, "Error occur in FileHandler.", e);
         }
 
         // Creating a console handler to write log to the console
@@ -84,7 +84,7 @@ public class ParseDroneDynamics {
 
         } catch (Exception e) {
             // Log any exceptions
-            LOG.log(Level.SEVERE, "An error occurred while parsing the drone dynamics: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while parsing the drone dynamics: " + e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -123,7 +123,7 @@ public class ParseDroneDynamics {
 
         } catch (Exception e) {
             // Log any exceptions
-            LOG.log(Level.SEVERE, "An error occurred while parsing the drone dynamics: " + e.getMessage(), e);
+            LOG.log(Level.WARNING, "An error occurred while parsing the drone dynamics: " + e.getMessage(), e);
             e.printStackTrace();
         }
     }

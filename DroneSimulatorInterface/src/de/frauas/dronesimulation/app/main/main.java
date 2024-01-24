@@ -27,13 +27,14 @@ public class main {
 		Handler consoleHandler;
 		try {
 			// File handler for logging to a file
-			fileHandler = new FileHandler("./Logs/mainLogFile.log");
+			fileHandler = new FileHandler("./mainLogFile.log");
 			LOG.addHandler(fileHandler);
 			Formatter xmlFormat = new XMLFormatter();
 			fileHandler.setFormatter(xmlFormat);
 			fileHandler.setLevel(Level.ALL);
 		} catch (IOException e) {
-			// Exception handling
+			LOG.severe("An error occurred while setting up the logger handlers: " + e.getMessage());
+			e.printStackTrace();
 		}
 
 		// Console handler for logging to the console
