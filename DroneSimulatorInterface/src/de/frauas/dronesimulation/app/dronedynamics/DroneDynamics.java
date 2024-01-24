@@ -17,7 +17,6 @@ public class DroneDynamics {
     private String latitude;
     private int batteryStatus;
     private int batteryPercentage;
-    private int carriage;
 
     private LocalDateTime lastSeen;
     private String status;
