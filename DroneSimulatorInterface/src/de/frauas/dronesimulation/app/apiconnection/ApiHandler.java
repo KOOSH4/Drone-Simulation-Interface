@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
-public class ApiHandle3 {
+public class ApiHandler {
 
     private static final Logger LOG = Logger.getLogger(ApiHandler.class.getName());
     private static final String USER_AGENT = "MOzilla FIrefox Awesome version";
