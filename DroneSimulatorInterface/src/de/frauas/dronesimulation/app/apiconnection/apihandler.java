@@ -111,7 +111,7 @@ public class ApiHandler {
                 System.out.println("GET request not worked");
             }
 
-            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + 36024);
+            url = new URL(ENDPOINT_URL_DRONE_DYNAMICS + "&limit=" + 25 + "&offset=" + 0);
             HttpURLConnection connection1 = (HttpURLConnection) url.openConnection();
             connection1.setRequestProperty("Authorization", TOKEN);
             connection1.setRequestProperty("User-Agent", USER_AGENT);

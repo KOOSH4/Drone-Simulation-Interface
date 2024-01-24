@@ -10,7 +10,7 @@ public class Helper {
 	public static void getDroneDynamics(ApiHandler droneApiHandler, List<DroneList> listOfDrones, int minutesBefore,
 			List<DroneDynamics> listOfDronesDynamicTimeStamp) {
 		try {
-			int offset = 36000 - (minutesBefore * 25);
+			int offset = (minutesBefore * 25);
 			if (offset >= 0) {
 				droneApiHandler.fetchDroneDynamics(listOfDrones, offset, listOfDronesDynamicTimeStamp);
 				listOfDronesDynamicTimeStamp.add(listOfDrones.get(0).getDroneDynamics());

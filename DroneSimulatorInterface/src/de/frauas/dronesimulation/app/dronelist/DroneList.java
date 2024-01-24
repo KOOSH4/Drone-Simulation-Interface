@@ -1,6 +1,8 @@
 package de.frauas.dronesimulation.app.dronelist;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class DroneList {
     private int id;
     private DroneType droneType; // instance of DroneType class
     private String droneTypeUri; // we can use this to call the DroneType API
-    private ZonedDateTime created;
+    private LocalDateTime created;
     private String serialNumber;
     private int carriageWeight;
     private String carriageType;
@@ -19,17 +21,20 @@ public class DroneList {
     private DroneDynamics droneDynamics; // To hold one DroneDynamics
 
     // Constructor
-    public DroneList(int id /* , DroneType droneType */, String droneTypeUri, ZonedDateTime created,
-            String serialNumber,
-            int carriageWeight, String carriageType) {
-        this.id = id;
+    public DroneList(int _id, String _droneTypeUri, String _created,
+            String _serialNumber,
+            int _carriageWeight, String _carriageType) {
+        this.id = _id;
         // this.droneType = droneType;
-        this.droneTypeUri = droneTypeUri;
-        this.created = created;
-        this.serialNumber = serialNumber;
-        this.carriageWeight = carriageWeight;
-        this.carriageType = carriageType;
+        this.droneTypeUri = _droneTypeUri;
+        this.serialNumber = _serialNumber;
+        this.carriageWeight = _carriageWeight;
+        this.carriageType = _carriageType;
         this.droneDynamicsList = new ArrayList<>(); // Initialize empty list for DroneDynamics
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(_created.toString(), formatter);
+        this.created = zonedDateTime.toLocalDateTime();
     }
 
     public DroneList() {
@@ -58,11 +63,11 @@ public class DroneList {
         this.droneTypeUri = droneTypeUri;
     }
 
-    public ZonedDateTime getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(ZonedDateTime created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 

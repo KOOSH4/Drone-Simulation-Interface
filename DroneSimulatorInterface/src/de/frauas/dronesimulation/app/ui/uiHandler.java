@@ -2,13 +2,21 @@ package de.frauas.dronesimulation.app.ui;
 
 //
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
+
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 //
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -26,6 +34,7 @@ import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 //
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
+import de.frauas.dronesimulation.app.main.Helper;
 
 public class uiHandler extends JFrame {
 
@@ -42,6 +51,7 @@ public class uiHandler extends JFrame {
 
 		JButton refreshButton = new JButton("Refresh");
 		JButton aboutUsButton = new JButton("About Us");
+
 		JLabel labelLastUpdate = new JLabel();
 		JLabel labelDrones = new JLabel();
 		JLabel labelDroneTypes = new JLabel();
@@ -81,7 +91,8 @@ public class uiHandler extends JFrame {
 
 		// set Icons for drone lables
 
-		String iconPath = "DroneSimulatorInterface/Resource/icons/";
+		String iconPath = "./src/resources/icons/";
+
 		ImageIcon iconDrone = new ImageIcon(
 				iconPath + "droneGallery/drone.png");
 		JLabel labelDroneIcon = new JLabel(iconDrone);
@@ -186,7 +197,17 @@ public class uiHandler extends JFrame {
 					labelCarriageType.setText("Carriage Type: " + droneCarriageType);
 
 					String droneCreated = String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated());
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getDayOfMonth()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getMonthValue()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getYear()
+									+ " "
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getHour()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getMinute()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getCreated().getSecond());
 					labelCreated.setText("Created: " + droneCreated);
 
 					// set text for Drone Type
@@ -226,7 +247,23 @@ public class uiHandler extends JFrame {
 					// set text for Drone Dynamics
 
 					String droneTimestamp = String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp());
+							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+									.getDayOfMonth()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+											.getMonthValue()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+											.getYear()
+									+ " "
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+											.getHour()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+											.getMinute()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getTimestamp()
+											.getSecond());
 					labelDDTimeStamp.setText("Timestamp: " + droneTimestamp);
 
 					String droneSpeed = String
@@ -258,7 +295,23 @@ public class uiHandler extends JFrame {
 					labelDDBatteryStatus.setText("Battery Status: " + droneBatteryStatus);
 
 					String droneLastSeen = String
-							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen());
+							.valueOf(listOfDrones
+									.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen().getDayOfMonth()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()
+											.getMonthValue()
+									+ "/"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()
+											.getYear()
+									+ " "
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()
+											.getHour()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()
+											.getMinute()
+									+ ":"
+									+ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneDynamics().getLastSeen()
+											.getSecond());
 					labelDDLastSeen.setText("Last Seen: " + droneLastSeen);
 
 					String droneStatus = String
@@ -276,15 +329,15 @@ public class uiHandler extends JFrame {
 							/ listOfDrones.get(DroneTable.getSelectedIndex()).getDroneType().getBatterycapacity();
 
 					labelDDBatteryPercentage.setText("Battery Percentage: " + batteryPercentage + "%");
-					if (batteryPercentage >= 0 && batteryPercentage <= 25) {
+					if (batteryPercentage == 0) {
 						labelDroneBatteryIcon.setIcon(iconBattery0);
-					} else if (batteryPercentage > 25 && batteryPercentage <= 50) {
+					} else if (batteryPercentage > 0 && batteryPercentage <= 35) {
 						labelDroneBatteryIcon.setIcon(iconBattery25);
-					} else if (batteryPercentage > 50 && batteryPercentage <= 75) {
+					} else if (batteryPercentage > 35 && batteryPercentage <= 60) {
 						labelDroneBatteryIcon.setIcon(iconBattery50);
-					} else if (batteryPercentage > 75 && batteryPercentage <= 100) {
+					} else if (batteryPercentage > 60 && batteryPercentage <= 99) {
 						labelDroneBatteryIcon.setIcon(iconBattery75);
-					} else if (batteryPercentage > 100) {
+					} else if (batteryPercentage == 100) {
 						labelDroneBatteryIcon.setIcon(iconBattery100);
 					}
 
@@ -348,8 +401,66 @@ public class uiHandler extends JFrame {
 				}
 			}
 		});
+
+		int hour = 00;
+		int minute = 00;
+		// Create a list to hold all time values
+		List<String> times = new ArrayList<>();
+
+		// Generate all possible time values
+		for (int i = hour; i < 24; i++) {
+			for (int j = minute; j < 60; j++) {
+				times.add(String.format("%02d:%02d", i, j));
+
+			}
+			minute = 0;
+		}
+
+		// Create a JComboBox and add all time values to it
+		JComboBox<String> timePicker = new JComboBox<>(times.toArray(new String[0]));
+
+		List<String> dates1 = new ArrayList<>();
+
+		// Iterate over the first two elements of the list
+		for (int i = 0; i < 2; i++) {
+			// Get the timestamp
+			LocalDateTime timestamp = listOfDronesDynamicTimeStamp.get(i).getTimestamp();
+
+			// Format the date
+			String date = String.format("%02d/%02d/%d",
+					timestamp.getDayOfMonth(),
+					timestamp.getMonthValue(),
+					timestamp.getYear());
+
+			dates1.add(date);
+
+		}
+		JComboBox<String> datePicker = new JComboBox<>(dates1.toArray(new String[0]));
+		// Set the selected item to the current time
+		timePicker.setSelectedItem(String.format("%02d:%02d", hour, minute));
+		JPanel dateTimePanel = new JPanel();
+		dateTimePanel.setBorder(new TitledBorder("Select Date and Time"));
+		dateTimePanel.add(datePicker);
+		dateTimePanel.add(timePicker);
+
+		datePicker
+				.addActionListener(e -> offsetSelectedDateTime(datePicker, timePicker, listOfDronesDynamicTimeStamp,
+						droneApiHandler, listOfDrones, DroneTable));
+		timePicker
+				.addActionListener(e -> offsetSelectedDateTime(datePicker, timePicker, listOfDronesDynamicTimeStamp,
+						droneApiHandler, listOfDrones, DroneTable));
+		timePicker.setSelectedItem(
+				String.format("%02d:%02d", listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour(),
+						listOfDronesDynamicTimeStamp.get(0).getTimestamp().getMinute()));
+
+		//////////////////////////
+		// Add an action listener to the button
+
+		/////////////////////////////////////////////////////////////////////////////////////////
 		// current time as last update in dd/mm/yyyy hh:mm:ss format
-		labelLastUpdate.setText("Last Update: " + java.time.LocalDateTime.now().toString());
+		labelLastUpdate.setText("Last Update: Today " + java.time.LocalDateTime.now().getHour() + ":"
+				+ java.time.LocalDateTime.now().getMinute() + ":"
+				+ java.time.LocalDateTime.now().getSecond());
 		labelDroneTypes.setText("Total Drone Types: " + listOfDroneTypes.size());
 		labelDrones.setText("Total Drones: " + listOfDrones.size());
 		int OnlineDrones = 0;
@@ -425,7 +536,7 @@ public class uiHandler extends JFrame {
 
 		OptionPanel.add(refreshButton);
 		OptionPanel.add(aboutUsButton);
-
+		OptionPanel.add(dateTimePanel);
 		// a panel for the Visual labels
 
 		JPanel VisualPanel = new JPanel(new GridLayout(4, 3)); // 1 column, as many rows as needed
@@ -465,6 +576,79 @@ public class uiHandler extends JFrame {
 			}
 
 		}
+	}
+
+	public int offsetSelectedDateTime(JComboBox<String> datePicker, JComboBox<String> timePicker,
+			List<DroneDynamics> listOfDronesDynamicTimeStamp, ApiHandler droneApiHandler,
+			List<DroneList> listOfDrones, JList<String> DroneTable) {
+		String selectedDate = (String) datePicker.getSelectedItem();
+		String selectedTime = (String) timePicker.getSelectedItem();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		String dateTimeString = selectedDate + " " + selectedTime;
+		LocalDateTime selecteDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+		String message = "";
+		if (datePicker.getSelectedIndex() == 0) {
+			if ((selecteDateTime.getHour() == listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour()
+					&& selecteDateTime.getMinute() >= listOfDronesDynamicTimeStamp.get(0).getTimestamp().getMinute())
+					|| selecteDateTime.getHour() > listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour()) {
+				System.out.println("Available");
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"There is no Dynamic Data in this Timestamp" + "\n" + "Please choose another time" + "\n"
+								+ "Dynamic data on selected day starts from:"
+								+ listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour() + ":"
+								+ listOfDronesDynamicTimeStamp.get(0).getTimestamp().getMinute() + "\n" + "");
+
+				System.out.println("Not available yet");
+			}
+		}
+		if (datePicker.getSelectedIndex() == 1) {
+			System.out.println("Selected date Hour: " + selecteDateTime.getHour());
+			System.out.println("Selected date Minute: " + selecteDateTime.getMinute());
+			System.out.println("SelectLI date Hour: " + listOfDronesDynamicTimeStamp.get(1).getTimestamp().getHour());
+			System.out
+					.println("SelectLI date Minute: " + listOfDronesDynamicTimeStamp.get(1).getTimestamp().getMinute());
+
+			if ((selecteDateTime.getHour() == listOfDronesDynamicTimeStamp.get(1).getTimestamp().getHour()
+					&& selecteDateTime.getMinute() <= listOfDronesDynamicTimeStamp.get(1).getTimestamp().getMinute())
+					|| selecteDateTime.getHour() < listOfDronesDynamicTimeStamp.get(1).getTimestamp().getHour()) {
+				System.out.println("Available");
+
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"There is no Dynamic Data in this Timestamp" + "\n" + "Please choose another time" + "\n"
+								+ "Dynamic data on selected day ends at: "
+								+ listOfDronesDynamicTimeStamp.get(1).getTimestamp().getHour() + ":"
+								+ listOfDronesDynamicTimeStamp.get(1).getTimestamp().getMinute() + "\n" + "");
+				System.out.println("Not available yet");
+			}
+		}
+
+		System.out.println("Selected date: " + selectedDate);
+		System.out.println("Selected time: " + selectedTime);
+		int hour = selecteDateTime.getHour();
+		int minute = selecteDateTime.getMinute();
+
+		// Calculate the total number of minutes
+		int totalMinutes = 0;
+
+		if (datePicker.getSelectedIndex() == 0) {
+			totalMinutes = (hour - listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour()) * 60
+					+ (minute - listOfDronesDynamicTimeStamp.get(0).getTimestamp().getMinute());
+		} else {
+			totalMinutes = (hour) * 60
+					+ (minute) + 893;
+		}
+
+		System.out.println("Total minutes from 00:00: " + totalMinutes);
+		if (0 <= totalMinutes && totalMinutes <= 1440) {
+			Helper.getDroneDynamics(droneApiHandler, listOfDrones, totalMinutes, listOfDronesDynamicTimeStamp);
+			DroneTable.setSelectedIndex(4);
+			DroneTable.setSelectedIndex(0);
+		}
+
+		return totalMinutes;
 	}
 
 }

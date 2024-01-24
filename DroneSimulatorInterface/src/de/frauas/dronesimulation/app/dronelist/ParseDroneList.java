@@ -24,7 +24,7 @@ public class ParseDroneList {
                     String carriageType = o.getString("carriage_type");
                     int carriageWeight = o.getInt("carriage_weight");
                     int id = o.getInt("id");
-                    ZonedDateTime created = ZonedDateTime.parse(o.getString("created"));
+                    String created = o.getString("created");
                     String serialNumber = o.getString("serialnumber");
                     String droneTypeUri = o.getString("dronetype");
 
