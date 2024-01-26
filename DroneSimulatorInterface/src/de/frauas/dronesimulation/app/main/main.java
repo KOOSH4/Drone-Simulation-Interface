@@ -11,13 +11,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
 import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
@@ -26,19 +19,27 @@ import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.ui.uiHandler;
 
 public class main {
+	// Logger for logging information and errors
 	private static final Logger LOG = Logger.getGlobal();
+	public static final String ROOT_FOLDER = "/icons/";
+
+	// Static block for setting up logger handlers
 	static {
 		Handler fileHandler;
 		Handler consoleHandler;
 		try {
-			fileHandler = new FileHandler("./Logs/mainLogFile.log");
+			// File handler for logging to a file
+			fileHandler = new FileHandler("./mainLogFile.log");
 			LOG.addHandler(fileHandler);
 			Formatter xmlFormat = new XMLFormatter();
 			fileHandler.setFormatter(xmlFormat);
 			fileHandler.setLevel(Level.ALL);
 		} catch (IOException e) {
-			// Exception handling
+			LOG.severe("An error occurred while setting up the logger handlers: " + e.getMessage());
+			e.printStackTrace();
 		}
+
+		// Console handler for logging to the console
 		consoleHandler = new ConsoleHandler();
 		LOG.addHandler(consoleHandler);
 		consoleHandler.setLevel(Level.WARNING);
@@ -57,30 +58,10 @@ public class main {
 			createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
 			System.out.println("size of drone type list: " + listOfDroneTypes.size());
 
-			// int minutesBefore = 250; // 1440 means current time and 0 means 24 hours
-			// before
-			int minutesBefore = 1440; // 1440 means current time and 0 means 24 hours before
+			int minutesBefore = 1440; // 0 means current time and 1440 means last offset
 
 			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
-			// for (DroneList drone : listOfDrones) {
-			// System.out.println("Drone " + i++ + ":");
-			// drone.printStatus();
-			// drone.getDroneType().printStatus();
-			// drone.getDroneDynamics().printStatus();
-			// System.out.println("###");
-			// }
-
-			// refreshData(droneApiHandler, listOfDrones, listOfDroneTypes, minutesBefore);
-			// call to refresh the data
-			// System.out.println("size of listOfDronesDynamicTimeStamp list: " +
-			// listOfDronesDynamicTimeStamp.size());
-			// System.out.println("size of listOfDrones list: " +
-			// listOfDronesDynamicTimeStamp.get(0).getTimestamp());
-			// System.out.println("size of listOfDrones list: " +
-			// listOfDronesDynamicTimeStamp.get(1).getTimestamp());
-
-			// Swap the dates if needed
-
+			listOfDrones.get(0).getDroneDynamics().printStatus();
 			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes, droneApiHandler, minutesBefore,
 					listOfDronesDynamicTimeStamp);
 			droneUI.setVisible(true);

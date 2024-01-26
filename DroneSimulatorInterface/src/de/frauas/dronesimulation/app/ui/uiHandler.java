@@ -2,12 +2,10 @@ package de.frauas.dronesimulation.app.ui;
 
 //
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 import java.time.LocalDateTime;
@@ -26,7 +24,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JOptionPane;
 //
-import java.awt.Font;
 import java.awt.Dimension;
 //
 import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
@@ -35,6 +32,7 @@ import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.main.Helper;
+import de.frauas.dronesimulation.app.main.main;
 
 public class uiHandler extends JFrame {
 
@@ -59,14 +57,12 @@ public class uiHandler extends JFrame {
 
 		// labels for drone list Panel
 
-		JLabel labelDroneListLable = new JLabel();
 		JLabel labelId = new JLabel();
 		JLabel labelSerialnumber = new JLabel();
 		JLabel labelCarriageWeight = new JLabel();
 		JLabel labelCarriageType = new JLabel();
 		JLabel labelCreated = new JLabel();
 		// labels for drone type panel
-		JLabel labelDroneTypeLable = new JLabel();
 		JLabel labelManufacturer = new JLabel();
 		JLabel labelTypeId = new JLabel();
 		JLabel labelTypeName = new JLabel();
@@ -76,7 +72,6 @@ public class uiHandler extends JFrame {
 		JLabel labelControlRange = new JLabel();
 		JLabel labelMaxCarriage = new JLabel();
 		// labels for drone dynamics Panel
-		JLabel labelDroneDynamicLable = new JLabel();
 		JLabel labelDDTimeStamp = new JLabel();
 		JLabel labelDDSpeed = new JLabel();
 		JLabel labelDDAlightRoll = new JLabel();
@@ -91,7 +86,8 @@ public class uiHandler extends JFrame {
 
 		// set Icons for drone lables
 
-		String iconPath = "./src/resources/icons/";
+		// String iconPath = "./icons/";
+		String iconPath = "./Drone-Simulation-Interface/DroneSimulatorInterface/src/resources/icons/";
 
 		ImageIcon iconDrone = new ImageIcon(
 				iconPath + "droneGallery/drone.png");
@@ -455,7 +451,9 @@ public class uiHandler extends JFrame {
 
 		//////////////////////////
 		// Add an action listener to the button
-
+		refreshButton.addActionListener(
+				e -> callRefreshData(droneApiHandler, listOfDrones, listOfDroneTypes, 12, listOfDronesDynamicTimeStamp,
+						DroneTable));
 		/////////////////////////////////////////////////////////////////////////////////////////
 		// current time as last update in dd/mm/yyyy hh:mm:ss format
 		labelLastUpdate.setText("Last Update: Today " + java.time.LocalDateTime.now().getHour() + ":"
@@ -587,7 +585,6 @@ public class uiHandler extends JFrame {
 		String dateTimeString = selectedDate + " " + selectedTime;
 		LocalDateTime selecteDateTime = LocalDateTime.parse(dateTimeString, formatter);
 
-		String message = "";
 		if (datePicker.getSelectedIndex() == 0) {
 			if ((selecteDateTime.getHour() == listOfDronesDynamicTimeStamp.get(0).getTimestamp().getHour()
 					&& selecteDateTime.getMinute() >= listOfDronesDynamicTimeStamp.get(0).getTimestamp().getMinute())
@@ -649,6 +646,16 @@ public class uiHandler extends JFrame {
 		}
 
 		return totalMinutes;
+	}
+
+	public static void callRefreshData(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
+			List<DroneType> listOfDroneTypes, int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp,
+			JList<String> DroneTable) {
+
+		main.refreshData(droneApiHandler, listOfDrones, listOfDroneTypes,
+				minutesBefore, listOfDronesDynamicTimeStamp);
+		DroneTable.setSelectedIndex(4);
+		DroneTable.setSelectedIndex(0);
 	}
 
 }
