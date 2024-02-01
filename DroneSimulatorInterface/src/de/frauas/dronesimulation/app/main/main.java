@@ -18,8 +18,35 @@ import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.ui.uiHandler;
 
+/**
+ * This is the main class of the application.
+ * It contains the main method, which is the entry point of the application.
+ * It also contains a static block for setting up logger handlers.
+ * It also contains two methods: one for populating the list of drones and
+ * another for creating DroneType objects and associating them with the
+ * corresponding DroneList objects.
+ * The main method initializes the ApiHandler, lists of drones, drone types, and
+ * drone dynamics.
+ * It then populates the drone list, creates drone type objects, and gets the
+ * drone dynamics.
+ * It also initializes the UI handler and sets it to visible.
+ * If an exception occurs during this process, it logs the error message.
+ */
 public class Main {
-	// Logger for logging information and errors
+
+	/**
+	 * Static block for setting up logger handlers.
+	 * It sets up two handlers: one for logging to a file and another for logging to
+	 * the console.
+	 * The file handler logs all levels of messages and uses an XML formatter.
+	 * The console handler only logs warning and higher level messages and uses a
+	 * simple formatter.
+	 * If an exception occurs while setting up the file handler, it logs the error
+	 * message.
+	 * this code only needs to be done once, no matter how many instances of the
+	 * class are
+	 * created. thats why a static block is used
+	 */
 	private static final Logger LOG = Logger.getGlobal();
 	public static final String ROOT_FOLDER = "/icons/";
 
@@ -47,6 +74,17 @@ public class Main {
 		consoleHandler.setFormatter(consoleFormat);
 	}
 
+	/**
+	 * This is the main method.
+	 * It initializes the ApiHandler, lists of drones, drone types, and drone
+	 * dynamics.
+	 * It then populates the drone list, creates drone type objects, and gets the
+	 * drone dynamics.
+	 * It also initializes the UI handler and sets it to visible.
+	 * If an exception occurs during this process, it logs the error message.
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			ApiHandler droneApiHandler = new ApiHandler();
@@ -75,6 +113,16 @@ public class Main {
 		}
 	}
 
+	/**
+	 * This method is used to populate the list of drones.
+	 * It fetches the drone list from the API and adds it to the provided list.
+	 * If an exception occurs during this process, it logs the error message and
+	 * stops the application.
+	 *
+	 * @param droneApiHandler this is an instance of DroneApiHandler
+	 * @param listOfDrones    this is an empty list that will store the drone
+	 *                        instances
+	 */
 	private static void populateDroneList(ApiHandler droneApiHandler, List<DroneList> listOfDrones) {
 		try {
 			ApiHandler.fetchDroneList(0, 30, listOfDrones);
@@ -85,6 +133,18 @@ public class Main {
 		}
 	}
 
+	/**
+	 * This method is used to create DroneType objects and associate them with the
+	 * corresponding DroneList objects.
+	 * It iterates over the list of drones, and for each drone, it checks if a
+	 * matching DroneType already exists.
+	 * If a match is found, it sets the DroneType for the drone. If no match is
+	 * found, it fetches the DroneType from the API and adds it to the list.
+	 *
+	 * @param droneApiHandler  this is an instance of DroneApiHandler
+	 * @param listOfDrones     this is a list of all drones
+	 * @param listOfDroneTypes this is an empty list of all drone types
+	 */
 	private static void createDroneTypeObj(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
 			List<DroneType> listOfDroneTypes) {
 		try {
@@ -111,6 +171,19 @@ public class Main {
 		}
 	}
 
+	/**
+	 * This method is used to refresh the data of drones and their types.
+	 * It first clears the existing lists of drones and drone types, then fetches
+	 * and creates the objects again.
+	 * It also gets the drone dynamics based on a specified timestamp.
+	 *
+	 * @param droneApiHandler              This is an instance of DroneApiHandler
+	 * @param listOfDrones                 This is a list of DroneList objects
+	 * @param listOfDroneTypes             This is a list of DroneType objects
+	 * @param minutesBefore                This is represents the time offset
+	 * @param listOfDronesDynamicTimeStamp This is a list of DroneDynamics objects
+	 * @return Nothing.
+	 */
 	public static void refreshData(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
 			List<DroneType> listOfDroneTypes, int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
 		// Clear the existing lists
