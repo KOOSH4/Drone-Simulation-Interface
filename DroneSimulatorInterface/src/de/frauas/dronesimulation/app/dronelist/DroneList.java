@@ -5,10 +5,14 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 
+/**
+ * This class represents a single drone.
+ * Each drone has an id, a drone type, a creation time, a serial number, a
+ * carriage weight, a carriage type, and a list of drone dynamics.
+ */
 public class DroneList {
     private int id;
     private DroneType droneType; // instance of DroneType class
@@ -20,7 +24,16 @@ public class DroneList {
     private List<DroneDynamics> droneDynamicsList; // To hold many DroneDynamics
     private DroneDynamics droneDynamics; // To hold one DroneDynamics
 
-    // Constructor
+    /**
+     * Constructor for creating a new DroneList.
+     *
+     * @param _id             The id of the drone.
+     * @param _droneTypeUri   The URI of the drone type API.
+     * @param _created        The creation time of the drone.
+     * @param _serialNumber   The serial number of the drone.
+     * @param _carriageWeight The carriage weight of the drone.
+     * @param _carriageType   The carriage type of the drone.
+     */
     public DroneList(int _id, String _droneTypeUri, String _created,
             String _serialNumber,
             int _carriageWeight, String _carriageType) {
@@ -37,6 +50,9 @@ public class DroneList {
         this.created = zonedDateTime.toLocalDateTime();
     }
 
+    /**
+     * Default constructor for creating a new DroneList without any parameters.
+     */
     public DroneList() {
     }
 
@@ -119,6 +135,9 @@ public class DroneList {
         this.droneDynamics = droneDynamics;
     }
 
+    /**
+     * Prints the status of the drone.
+     */
     public void printStatus() {
         System.out.println("Drone Instance from List: ");
         System.out.println("\n" + id + "\t" + carriageType + "\t" + serialNumber + "\t" + created + "\t"
