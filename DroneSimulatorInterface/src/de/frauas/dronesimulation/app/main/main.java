@@ -16,10 +16,12 @@ import de.frauas.dronesimulation.app.apiconnection.ApiHandler;
 import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
+import de.frauas.dronesimulation.app.ui.uiHandler;
 
 public class main {
 	// Logger for logging information and errors
 	private static final Logger LOG = Logger.getGlobal();
+	public static final String ROOT_FOLDER = "/icons/";
 
 	// Static block for setting up logger handlers
 	static {
@@ -47,37 +49,32 @@ public class main {
 
 	public static void main(String[] args) {
 		try {
-			// Initialize API handler and lists for drones, drone types, and drone dynamics
 			ApiHandler droneApiHandler = new ApiHandler();
 			List<DroneList> listOfDrones = new ArrayList<>();
 			List<DroneType> listOfDroneTypes = new ArrayList<>();
 			List<DroneDynamics> listOfDronesDynamicTimeStamp = new ArrayList<>();
-
-			// Populate drone list and create drone type objects
 			populateDroneList(droneApiHandler, listOfDrones);
+			System.out.println("size of drone list: " + listOfDrones.size());
 			createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
+			System.out.println("size of drone type list: " + listOfDroneTypes.size());
 
-			int minutesBefore = 0; // 0 means current time and 1440 means last data offset 24 hours
+			int minutesBefore = 1440; // 0 means current time and 1440 means last offset
 
-			// Get drone dynamics
 			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
-
-			// Print status of the first drone
 			listOfDrones.get(0).getDroneDynamics().printStatus();
-
-			// Log the size of drone list and drone type list
+			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes, droneApiHandler, minutesBefore,
+					listOfDronesDynamicTimeStamp);
+			droneUI.setVisible(true);
 			LOG.info("Size of drone list: " + listOfDrones.size());
 			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
 
 			LOG.info("Done.");
 		} catch (Exception e) {
-			// Log any exceptions that occur
 			LOG.severe("An error occurred: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
-	// Method to populate drone list
 	private static void populateDroneList(ApiHandler droneApiHandler, List<DroneList> listOfDrones) {
 		try {
 			droneApiHandler.fetchDroneList(0, 30, listOfDrones);
@@ -88,14 +85,12 @@ public class main {
 		}
 	}
 
-	// Method to create drone type objects
 	private static void createDroneTypeObj(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
 			List<DroneType> listOfDroneTypes) {
 		try {
 			for (DroneList drone : listOfDrones) {
 				boolean matchFound = false;
 
-				// Check if drone type already exists in the list
 				for (DroneType droneType : listOfDroneTypes) {
 					if (drone.getDronetypeUri().equals(droneType.getDroneTypeUri())) {
 						drone.setDroneType(droneType);
@@ -104,7 +99,6 @@ public class main {
 					}
 				}
 
-				// If drone type does not exist, fetch it and add to the list
 				if (!matchFound) {
 					droneApiHandler.fetchDroneType(drone);
 					listOfDroneTypes.add(drone.getDroneType());
@@ -116,4 +110,18 @@ public class main {
 			System.exit(1); // stop the application
 		}
 	}
+
+	public static void refreshData(ApiHandler droneApiHandler, List<DroneList> listOfDrones,
+			List<DroneType> listOfDroneTypes, int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
+		// Clear the existing lists
+		listOfDrones.clear();
+		listOfDroneTypes.clear();
+
+		// Fetch and create the objects again
+		populateDroneList(droneApiHandler, listOfDrones);
+		createDroneTypeObj(droneApiHandler, listOfDrones, listOfDroneTypes);
+		Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
+		System.out.println("Refreshed the data!");
+	}
+
 }
