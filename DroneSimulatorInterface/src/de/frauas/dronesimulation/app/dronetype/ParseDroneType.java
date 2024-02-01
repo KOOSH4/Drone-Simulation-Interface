@@ -4,39 +4,50 @@ import org.json.JSONObject;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import java.util.logging.*;
 
+/**
+ * This class is used to parse the drone type from a JSON response.
+ */
 public class ParseDroneType {
     // Logger for this class
     private static final Logger LOG = Logger.getLogger(ParseDroneType.class.getName());
 
+    /**
+     * Static block for setting up logger handlers.
+     * It sets up two handlers: one for logging to a file and another for logging to
+     * the console.
+     * The file handler logs all levels of messages and uses an XML formatter.
+     */
     static {
         Handler fileHandler;
         Handler consoleHandler;
         try {
             // File handler for logging to a file
             fileHandler = new FileHandler("./ParseDroneTypeLogFile.log");
-            // Add the file handler to the logger
             LOG.addHandler(fileHandler);
-            // Set the formatter for the file handler to XML
             Formatter xmlFormat = new XMLFormatter();
             fileHandler.setFormatter(xmlFormat);
-            // Log all levels to the file
             fileHandler.setLevel(Level.ALL);
         } catch (Exception e) {
-            // Log any exceptions that occur with the file handler
             LOG.log(Level.WARNING, "Error occur in FileHandler.", e);
         }
 
         // Console handler for logging to the console
         consoleHandler = new ConsoleHandler();
-        // Add the console handler to the logger
         LOG.addHandler(consoleHandler);
-        // Only log warnings and above to the console
         consoleHandler.setLevel(Level.WARNING);
-        // Set the formatter for the console handler to simple text
         Formatter consoleFormat = new SimpleFormatter();
         consoleHandler.setFormatter(consoleFormat);
     }
 
+    /**
+     * Parses a JSON response to extract drone type information and sets it to a
+     * drone instance.
+     * If an exception occurs during this process, it logs a warning message.
+     *
+     * @param input This is the response from the API call
+     * @param drone This is the drone instance to which the drone type information
+     *              is set to after parsing
+     */
     public static void parseJsonResponse(String input, DroneList drone) {
         try {
             // Create a JSONObject from the input string
