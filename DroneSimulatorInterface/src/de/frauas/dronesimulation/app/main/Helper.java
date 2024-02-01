@@ -1,12 +1,10 @@
 package de.frauas.dronesimulation.app.main;
 
-import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +19,6 @@ public class Helper {
 	// Static block for setting up logger handlers
 	static {
 		Handler fileHandler;
-		Handler consoleHandler;
 		try {
 			// File handler for logging to a file
 			fileHandler = new FileHandler("./HelperLogFile.log");

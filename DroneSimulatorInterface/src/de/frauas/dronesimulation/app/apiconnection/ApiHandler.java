@@ -104,7 +104,7 @@ public class ApiHandler {
     }
 
     // Method to fetch the drone type from the API
-    public static void fetchDroneType(DroneList drone) {
+    public void fetchDroneType(DroneList drone) {
         try {
             // Create a URL object with the drone type URI
             URL url = new URL(drone.getDronetypeUri());

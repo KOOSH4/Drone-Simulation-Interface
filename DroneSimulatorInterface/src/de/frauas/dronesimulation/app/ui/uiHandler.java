@@ -32,9 +32,14 @@ import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.main.Helper;
-import de.frauas.dronesimulation.app.main.main;
+import de.frauas.dronesimulation.app.main.Main;
 
 public class uiHandler extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public uiHandler(List<DroneList> listOfDrones, List<DroneType> listOfDroneTypes, ApiHandler droneApiHandler,
 			int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
@@ -45,7 +50,6 @@ public class uiHandler extends JFrame {
 		JPanel panel = new JPanel();
 
 		// labels for Option Panel
-		JLabel labelDroneOptionLable = new JLabel();
 
 		JButton refreshButton = new JButton("Refresh");
 		JButton aboutUsButton = new JButton("About Us");
@@ -171,8 +175,6 @@ public class uiHandler extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
-					String selectedDrone = DroneTable.getSelectedValue();
-					// 20
 
 					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 					labelId.setText("Drone ID: " + droneId);
@@ -183,7 +185,6 @@ public class uiHandler extends JFrame {
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getSerialnumber());
 					labelSerialnumber.setText("Serialnumber: " + droneSerialnumber);
 
-					int selectedIndex = DroneTable.getSelectedIndex();
 
 					String droneCarriageWeight = String
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageWeight());
@@ -652,7 +653,7 @@ public class uiHandler extends JFrame {
 			List<DroneType> listOfDroneTypes, int minutesBefore, List<DroneDynamics> listOfDronesDynamicTimeStamp,
 			JList<String> DroneTable) {
 
-		main.refreshData(droneApiHandler, listOfDrones, listOfDroneTypes,
+		Main.refreshData(droneApiHandler, listOfDrones, listOfDroneTypes,
 				minutesBefore, listOfDronesDynamicTimeStamp);
 		DroneTable.setSelectedIndex(4);
 		DroneTable.setSelectedIndex(0);

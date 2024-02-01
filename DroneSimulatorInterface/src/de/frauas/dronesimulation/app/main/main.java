@@ -18,7 +18,7 @@ import de.frauas.dronesimulation.app.dronelist.DroneList;
 import de.frauas.dronesimulation.app.dronetype.DroneType;
 import de.frauas.dronesimulation.app.ui.uiHandler;
 
-public class main {
+public class Main {
 	// Logger for logging information and errors
 	private static final Logger LOG = Logger.getGlobal();
 	public static final String ROOT_FOLDER = "/icons/";
@@ -77,7 +77,7 @@ public class main {
 
 	private static void populateDroneList(ApiHandler droneApiHandler, List<DroneList> listOfDrones) {
 		try {
-			droneApiHandler.fetchDroneList(0, 30, listOfDrones);
+			ApiHandler.fetchDroneList(0, 30, listOfDrones);
 		} catch (Exception e) {
 			LOG.severe("An error occurred while Calling and creating the drone list: " + e.getMessage());
 			e.printStackTrace();

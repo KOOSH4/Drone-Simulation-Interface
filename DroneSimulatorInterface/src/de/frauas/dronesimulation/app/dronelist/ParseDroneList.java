@@ -2,7 +2,6 @@ package de.frauas.dronesimulation.app.dronelist;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.logging.*;
 
