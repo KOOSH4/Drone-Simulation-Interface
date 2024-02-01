@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZonedDateTime;
 
+/**
+ * This class represents the dynamics of a drone.
+ */
 public class DroneDynamics {
     private String drone;
     private LocalDateTime timestamp;
@@ -18,7 +21,22 @@ public class DroneDynamics {
     private LocalDateTime lastSeen;
     private String status;
 
-    // Constructor for DroneDynamics class
+    /**
+     * Constructor for DroneDynamics class.
+     *
+     * @param _drone             the corrsponding drone obj URI
+     * @param _timestamp         the timestamp
+     * @param _speed             the speed
+     * @param _alignRoll         the roll alignment
+     * @param _alignPitch        the pitch alignment
+     * @param _alignYaw          the yaw alignment
+     * @param _longitude         the longitude
+     * @param _latitude          the latitude
+     * @param _batteryStatus     the battery status
+     * @param _lastSeen          the last seen timestamp
+     * @param _status            the status On/Off
+     * @param _batteryPercentage the battery percentage
+     */
     public DroneDynamics(String _drone, String _timestamp, int _speed, String _alignRoll, String _alignPitch,
             String _alignYaw, String _longitude, String _latitude, int _batteryStatus, String _lastSeen,
             String _status, int _batteryPercentage) {
@@ -138,6 +156,9 @@ public class DroneDynamics {
         return batteryPercentage;
     }
 
+    /**
+     * Prints the drone dynamics.
+     */
     public void printStatus() {
         System.out.println("Drone Dynamics: ");
         System.out.println(
