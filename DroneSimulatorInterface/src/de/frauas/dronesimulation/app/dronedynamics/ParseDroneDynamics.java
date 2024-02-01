@@ -7,6 +7,9 @@ import de.frauas.dronesimulation.app.dronelist.DroneList;
 import org.json.JSONArray;
 import java.util.List;
 
+/**
+ * This class is responsible for parsing drone dynamics from a JSON response.
+ */
 public class ParseDroneDynamics {
     private static final Logger LOG = Logger.getLogger(ParseDroneDynamics.class.getName());
 
@@ -33,6 +36,23 @@ public class ParseDroneDynamics {
         consoleHandler.setFormatter(consoleFormat);
     }
 
+    /**
+     * this is main method of the class. iT parses the JSON response and adds the
+     * parsed drone dynamics to the corresponding drone objects.
+     * it parses a JSON response and adds the parsed drone dynamics to the given
+     * lists.
+     *
+     * @param input                        the JSON response to parse
+     * @param listOfDrones                 the list of drones to add the parsed
+     *                                     dynamics to
+     * @param listOfDronesDynamicTimeStamp the list of drone dynamics to add the
+     *                                     parsed dynamics to. this is a special
+     *                                     list that stores only the first and last
+     *                                     drone dynamics from API (very first
+     *                                     object of Drone dynamic api and very last
+     *                                     one) so we can calculate the number of
+     *                                     data using their timestamp dates.
+     */
     public static void parseJsonResponse(String input, List<DroneList> listOfDrones,
             List<DroneDynamics> listOfDronesDynamicTimeStamp) {
         try {
@@ -89,6 +109,19 @@ public class ParseDroneDynamics {
         }
     }
 
+    /**
+     * Parses a JSON response for a specific date and adds the parsed drone dynamics
+     * to the given list.
+     *
+     * @param input                        the JSON response to parse
+     * @param listOfDronesDynamicTimeStamp the list of drone dynamics to add the
+     *                                     parsed dynamics to. this is a special
+     *                                     list that stores only the first and last
+     *                                     drone dynamics from API (very first
+     *                                     object of Drone dynamic api and very last
+     *                                     one) so we can calculate the number of
+     *                                     data using their timestamp dates.
+     */
     public static void parseJsonResponseForDate(String input, List<DroneDynamics> listOfDronesDynamicTimeStamp) {
         try {
             // Convert the input string to a JSON object
