@@ -1,5 +1,11 @@
 package de.frauas.dronesimulation.app.dronetype;
 
+/**
+ * This class represents a type of drone with various properties.
+ * drone type objects are created using droneTypeURI that is stored in each
+ * drone instane object and associated with the drone instance object.
+ * for every drone model there is only one drone type object.
+ */
 public class DroneType {
     private int typeId;
     private String manufacturer;
@@ -10,6 +16,20 @@ public class DroneType {
     private int controlRange;
     private int maxCarriage;
     String DroneTypeUri;
+
+    /**
+     * Constructs a new DroneType with the given parameters.
+     *
+     * @param _typeId          the ID of the drone type (different from the drone ID
+     *                         in drone objects)
+     * @param _manufacturer    the manufacturer of the drone
+     * @param _typeName        the name of the drone type
+     * @param _weight          the weight of the drone
+     * @param _maxSpeed        the maximum speed of the drone
+     * @param _batteryCapacity the battery capacity of the drone
+     * @param _controlRange    the control range of the drone
+     * @param _maxCarriage     the maximum carriage of the drone
+     */
 
     public DroneType(int _typeId, String _manufacturer, String _typeName, int _weight, int _maxSpeed,
             int _batteryCapacity, int _controlRange, int _maxCarriage) {
@@ -97,6 +117,9 @@ public class DroneType {
         return DroneTypeUri;
     }
 
+    /**
+     * This method prints the status of the drone type.
+     */
     public void printStatus() {
         System.out.println("Drone Type: ");
         System.out.println(
