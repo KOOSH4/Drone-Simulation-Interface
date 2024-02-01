@@ -21,6 +21,13 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
+/**
+ * This class handles the API connection.
+ * It contains methods for fetching the drone list, drone type, and drone
+ * dynamics
+ * from the API.
+ * It also contains a static block for setting up logger handlers.
+ */
 public class ApiHandler {
 
     private static final Logger LOG = Logger.getLogger(ApiHandler.class.getName());
@@ -28,9 +35,20 @@ public class ApiHandler {
     private static final String ENDPOINT_URL_DRONE_LIST = "https://dronesim.facets-labs.com/api/drones/?format=json";
     private static final String ENDPOINT_URL_DRONE_DYNAMICS = "https://dronesim.facets-labs.com/api/dronedynamics/?format=json";
     private static final String TOKEN = "Token 2ace84830f9ad2a039c6a6dda7b529bac48a71cd";
-    ///////////
 
-    // Static block to initialize logging handlers
+    /**
+     * Static block for setting up logger handlers.
+     * It sets up two handlers: one for logging to a file and another for logging to
+     * the console.
+     * The file handler logs all levels of messages and uses an XML formatter.
+     * The console handler only logs warning and higher level messages and uses a
+     * simple formatter.
+     * If an exception occurs while setting up the file handler, it logs the error
+     * message.
+     * this code only needs to be done once, no matter how many instances of the
+     * class are
+     * created. thats why a static block is used
+     */
     static {
         Handler fileHandler;
         Handler consoleHandler;
@@ -59,7 +77,26 @@ public class ApiHandler {
         consoleHandler.setFormatter(consoleFormat);
     }
 
-    // Method to fetch the drone list from the API
+    /**
+     * This method fetches the drone list from the API.
+     * It takes an offset and limit as parameters.
+     * It also takes an empty list of drnes as a parameter.
+     * It creates a URL object with the API endpoint and the specified limit and
+     * offset.
+     * It then opens a connection to the URL and sets the request properties.
+     * after that it gets the response.
+     * If the response code is OK, it creates a BufferedReader to read the response
+     * and a StringBuffer to store the response.
+     * It then reads the response line by line and appends it to the StringBuffer.
+     * It then closes the BufferedReader and parses the JSON response.
+     * If the response code is not OK, it logs a warning.
+     * If an exception occurs during this process, it logs the error message and
+     * stops the application.
+     *
+     * @param offset       the offset
+     * @param limit        the limit
+     * @param listOfDrones the list of drones
+     */
     public static void fetchDroneList(int offset, int limit, List<DroneList> listOfDrones) {
         try {
             // Create a URL object with the API endpoint
@@ -78,18 +115,27 @@ public class ApiHandler {
 
             // If the response code is OK
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Create a BufferedReader to read the response
+                // This line creates a BufferedReader that reads from the InputStream of the
+                // connection. This InputStream contains the data returned from the server.
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                // We Declare a String variable inputLine to hold each line of the
+                // response, and a StringBuffer response to hold the entire response.
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
-                // Read the response line by line
+                /**
+                 * 
+                 * This loop reads each line from the `BufferedReader` and appends it to
+                 * the `response`. When `readLine()` returns `null`, that means it has reached
+                 * the end of the stream, and the loop exits.
+                 */
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-                // Close the BufferedReader
-                in.close();
-                // Parse the JSON response
+                /*
+                 * The line of code `in.close();` is used to close the `BufferedReader` after
+                 * it's no longer needed. in.close();
+                 * Parse the JSON response
+                 */
                 ParseDroneList.parseJsonResponse(response.toString(), listOfDrones);
             } else {
                 // Log a warning if the GET request did not work
@@ -103,7 +149,23 @@ public class ApiHandler {
         }
     }
 
-    // Method to fetch the drone type from the API
+    /**
+     * This method fetches the drone type from the API.
+     * It takes a single drone object as a parameter.
+     * It creates a URL object with the drone type URI that is stored in drone obj
+     * as string.
+     * It then opens a connection to the URL and sets the request properties.
+     * after that it gets the response.
+     * If the response code is OK, it creates a BufferedReader to read the response
+     * and a StringBuffer to store the response.
+     * It then reads the response line by line and appends it to the StringBuffer.
+     * It then closes the BufferedReader and call parser methde to the JSON
+     * response.
+     * If an exception occurs during this process, it logs the error message and
+     * stops the application.
+     *
+     * @param drone the drone object
+     */
     public void fetchDroneType(DroneList drone) {
         try {
             // Create a URL object with the drone type URI
@@ -145,7 +207,39 @@ public class ApiHandler {
         }
     }
 
-    // Method to fetch the drone dynamics from the API
+    /**
+     * This method fetches the drone dynamics from the API.
+     * It takes an offset as a parameter.
+     * It also takes a list of drones and an empty list of drone dynamics timestampt
+     * as
+     * parameters.
+     * It creates a URL object with the API endpoint and the specified limit and
+     * offset.
+     * the offset is calculated in helper class within getDroneDynamics method and
+     * calls only wanted drone dynamic info based of its offset
+     * it reduces the amount of data to be fetched from the API and reduces the load
+     * time of the application
+     * It then opens a connection to the URL and sets the request properties.
+     * after that it gets the response.
+     * If the response code is OK, it creates a BufferedReader to read the response
+     * and a StringBuffer to store the response.
+     * It then reads the response line by line and appends it to the StringBuffer.
+     * It then closes the BufferedReader and parses the JSON response.
+     * If the response code is not OK, it logs a warning.
+     * If an exception occurs during this process, it logs the error message and
+     * stops the application.
+     * 
+     * note: we call the parser and api two times and store objects in
+     * listOfDroneDnamicTimestamp because we need to get the very
+     * first timestamp of the drone dynamics and very last timestamp of the drone
+     * dynamics to calculate the offset between the two timestamps and then call the
+     * api again with the offset to get the drone dynamics
+     *
+     * @param listOfDrones                 the list of drones
+     * @param offset                       the offset
+     * @param listOfDronesDynamicTimeStamp the list of drone dynamics
+     *                                     timestamp
+     */
     public void fetchDroneDynamics(List<DroneList> listOfDrones, int offset,
             List<DroneDynamics> listOfDronesDynamicTimeStamp) {
         try {
