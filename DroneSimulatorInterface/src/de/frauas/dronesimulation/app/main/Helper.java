@@ -12,11 +12,16 @@ import de.frauas.dronesimulation.app.apiconnection.ApiHandler; // Import the api
 import de.frauas.dronesimulation.app.dronedynamics.DroneDynamics;
 import de.frauas.dronesimulation.app.dronelist.DroneList;
 
+/**
+ * Helper class provides utility methods for drone dynamics
+ */
 public class Helper {
 
 	private static final Logger LOG = Logger.getGlobal();
 
-	// Static block for setting up logger handlers
+	/**
+	 * Static block for setting up logger handlers.
+	 */
 	static {
 		Handler fileHandler;
 		try {
@@ -32,6 +37,16 @@ public class Helper {
 		}
 	}
 
+	/**
+	 * Fetches drone dynamics based on a specified offset.
+	 * If an exception occurs during this process, it logs a warning message.
+	 *
+	 * @param droneApiHandler              This is an instance of ApiHandler class
+	 * @param listOfDrones                 This is a list that contains all drones
+	 * @param minutesBefore                This represents the offset value
+	 * @param listOfDronesDynamicTimeStamp This is a list that contains first and
+	 *                                     last drone dynamics info from API
+	 */
 	public static void getDroneDynamics(ApiHandler droneApiHandler, List<DroneList> listOfDrones, int minutesBefore,
 			List<DroneDynamics> listOfDronesDynamicTimeStamp) {
 		try {
@@ -48,25 +63,4 @@ public class Helper {
 		}
 	}
 
-	public static void printDroneDynamicsStatus(List<DroneList> listOfDrones, int selectedDroneIndex) {
-		try {
-			listOfDrones.get(selectedDroneIndex).getDroneDynamicsList().get(0).printStatus();
-		} catch (Exception e) {
-			LOG.warning("An error occurred while fetching dynamics info:  " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	public static int calculatePayloadPercentage(DroneList droneInstance) {
-		try {
-			int payloadPercentage = (droneInstance.getCarriageWeight() * 100)
-					/ droneInstance.getDroneType().getMaxCarriage();
-			System.out.println("PAYLOAD PERCENTAGE: " + payloadPercentage);
-			return payloadPercentage;
-		} catch (Exception e) {
-			LOG.warning("An error occurred while fetching dynamics info:  " + e.getMessage());
-			e.printStackTrace();
-			return 0;
-		}
-	}
 }
