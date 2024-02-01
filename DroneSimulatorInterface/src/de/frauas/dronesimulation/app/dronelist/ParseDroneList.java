@@ -5,6 +5,10 @@ import org.json.JSONArray;
 import java.util.List;
 import java.util.logging.*;
 
+/**
+ * This class is responsible for parsing a list of drones from a JSON response.
+ * It contains a static block for setting up logger handlers.
+ */
 public class ParseDroneList {
     private static final Logger LOG = Logger.getLogger(ParseDroneList.class.getName());
 
@@ -31,7 +35,19 @@ public class ParseDroneList {
         consoleHandler.setFormatter(consoleFormat);
     }
 
-    public static void parseJsonResponse(String input, List<DroneList> droneInstanceList) {
+    /**
+     * Parses a JSON response and adds the parsed drones to the given drone list.
+     *
+     * @param input        the JSON response to parse
+     * @param listOfDrones the list to add the parsed drones to
+     *                     This code is static and it makes makes the method easier
+     *                     to use,
+     *                     because we don't need to create an instance of
+     *                     ParseDroneList to use it. we can simply call
+     *                     ParseDroneList.parseJsonResponse(input, listOfDrones)
+     *                     from anywhere in our code.
+     */
+    public static void parseJsonResponse(String input, List<DroneList> listOfDrones) {
         try {
             // Create a JSONObject with the response
             JSONObject wholeFile = new JSONObject(input);
@@ -54,7 +70,7 @@ public class ParseDroneList {
 
                     DroneList drone = new DroneList(id, droneTypeUri, created, serialNumber, carriageWeight,
                             carriageType);
-                    droneInstanceList.add(drone);
+                    listOfDrones.add(drone);
                 }
             }
         } catch (Exception e) {
