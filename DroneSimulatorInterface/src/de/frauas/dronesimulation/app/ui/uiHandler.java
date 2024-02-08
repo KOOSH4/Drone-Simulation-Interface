@@ -457,12 +457,9 @@ public class uiHandler extends JFrame {
 		// to open a dialog box with the about us information
 		aboutUsButton.addActionListener(e -> JOptionPane.showMessageDialog(null,
 				"Drone Simulation Interface" + "\n" + "Object Oriented Programming with Java" + "\n"
-						+ "Prof. Dr. Robin Müller-Bady" + "\n"
-						+ "Frankfurt University of Applied Sciences" + "\n"
 						+ "" + "\n" + "\n" + "Developed by:" + "\n"
-						+ "Group 22" + "\n" + "\n" + "Group Members:" + "\n" + "Koosha Olad" + "\n" + "Tara Khoramnia"
-						+ "\n" + "Hana Khaled Ismail Eltalawy" + "\n" + "Reubin Sam Thomas" + "\n" + "Kartik Riziya"
-						+ "" + "\n" + "\n" + "Winter Semester 2023-24"));
+						+ "Group 22" + "\n" + "\n" + "Group Members:" + "\n" + "KOOSH4" + "\n" + "Tata-kh" + ""
+						+ "\n"));
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
 
