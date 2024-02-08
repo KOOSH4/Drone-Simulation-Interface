@@ -49,8 +49,6 @@ public class uiHandler extends JFrame {
 
 		JPanel panel = new JPanel();
 
-		// labels for Option Panel
-
 		JButton refreshButton = new JButton("Refresh");
 		JButton aboutUsButton = new JButton("About Us");
 
@@ -91,73 +89,58 @@ public class uiHandler extends JFrame {
 		// set Icons for drone lables
 
 		// String iconPath = "./icons/";
-		String iconPath = "./Drone-Simulation-Interface/DroneSimulatorInterface/src/resources/icons/";
+		String iconPath = "./DroneSimulatorInterface/src/resources/icons/";
 
-		ImageIcon iconDrone = new ImageIcon(
-				iconPath + "droneGallery/drone.png");
+		// Drone Icons
+		ImageIcon iconDrone = new ImageIcon(iconPath + "droneGallery/drone.png");
+		ImageIcon iconDroneSenAct = new ImageIcon(getClass().getResource("/icons/droneGallery/droneACT.png"));
+		ImageIcon iconDroneSenNot = new ImageIcon(getClass().getResource("/icons/droneGallery/droneNOT.png"));
+		ImageIcon iconDroneSenSen = new ImageIcon(getClass().getResource("/icons/droneGallery/droneSEN.png"));
+
+		// Battery Icons
+		ImageIcon iconBattery0 = new ImageIcon(getClass().getResource("/icons/battery0.png"));
+		ImageIcon iconBattery25 = new ImageIcon(getClass().getResource("/icons/battery25.png"));
+		ImageIcon iconBattery50 = new ImageIcon(getClass().getResource("/icons/battery50.png"));
+		ImageIcon iconBattery75 = new ImageIcon(getClass().getResource("/icons/battery75.png"));
+		ImageIcon iconBattery100 = new ImageIcon(getClass().getResource("/icons/battery100.png"));
+
+		// Switch Icons
+		ImageIcon iconSwitchOff = new ImageIcon(getClass().getResource("/icons/switch-off.png"));
+		ImageIcon iconSwitchOn = new ImageIcon(getClass().getResource("/icons/switch-on.png"));
+
+		// Empty Icon
+		ImageIcon iconEmpty1 = new ImageIcon(getClass().getResource("/icons/empty.png"));
+
+		// Drone Gallery Icons
+		ImageIcon iconDroneGalleryAA108 = new ImageIcon(getClass().getResource("/icons/droneGallery/AA108.png"));
+		ImageIcon iconDroneGalleryChromaCameraDrone = new ImageIcon(
+				getClass().getResource("/icons/droneGallery/Chroma Camera Drone.png"));
+		ImageIcon iconDroneGalleryD80 = new ImageIcon(getClass().getResource("/icons/droneGallery/D80.png"));
+		ImageIcon iconDroneGalleryEvoII = new ImageIcon(getClass().getResource("/icons/droneGallery/Evo II.png"));
+		ImageIcon iconDroneGalleryF24Pro = new ImageIcon(getClass().getResource("/icons/droneGallery/F24 Pro.png"));
+		ImageIcon iconDroneGalleryHS100 = new ImageIcon(getClass().getResource("/icons/droneGallery/HS100.png"));
+		ImageIcon iconDroneGalleryKarma = new ImageIcon(getClass().getResource("/icons/droneGallery/Karma.png"));
+		ImageIcon iconDroneGalleryPowerEggX = new ImageIcon(
+				getClass().getResource("/icons/droneGallery/PowerEgg X.png"));
+		ImageIcon iconDroneGalleryS5C = new ImageIcon(getClass().getResource("/icons/droneGallery/S5C.png"));
+		ImageIcon iconDroneGallerySkydio2 = new ImageIcon(getClass().getResource("/icons/droneGallery/Skydio 2.png"));
+		ImageIcon iconDroneGalleryTello = new ImageIcon(getClass().getResource("/icons/droneGallery/Tello.png"));
+		ImageIcon iconDroneGalleryTyphoonHPro = new ImageIcon(
+				getClass().getResource("/icons/droneGallery/Typhoon H Pro.png"));
+		ImageIcon iconDroneGalleryVoyager4 = new ImageIcon(getClass().getResource("/icons/droneGallery/Voyager 4.png"));
+		ImageIcon iconDroneGalleryX4H107D = new ImageIcon(getClass().getResource("/icons/droneGallery/X4 H107D.png"));
+		ImageIcon iconDroneGalleryX5C = new ImageIcon(getClass().getResource("/icons/droneGallery/X5C.png"));
+
+		// Labels
 		JLabel labelDroneIcon = new JLabel(iconDrone);
-		ImageIcon iconBattery0 = new ImageIcon(
-				iconPath + "battery0.png");
-		ImageIcon iconBattery25 = new ImageIcon(
-				iconPath + "battery25.png");
-		ImageIcon iconBattery50 = new ImageIcon(
-				iconPath + "battery50.png");
-		ImageIcon iconBattery75 = new ImageIcon(
-				iconPath + "battery75.png");
-		ImageIcon iconBattery100 = new ImageIcon(
-				iconPath + "battery100.png");
 		JLabel labelDroneBatteryIcon = new JLabel(iconBattery100);
-		ImageIcon iconSwitchOff = new ImageIcon(iconPath +
-				"switch-off.png");
-		ImageIcon iconSwitchOn = new ImageIcon(
-				iconPath + "switch-on.png");
 		JLabel labelDroneIconCarriageType = new JLabel(iconDrone);
-		ImageIcon iconDroneSenAct = new ImageIcon(
-				iconPath + "droneGallery/droneACT.png");
-		ImageIcon iconDroneSenNot = new ImageIcon(
-				iconPath + "droneGallery/droneNOT.png");
-		ImageIcon iconDroneSenSen = new ImageIcon(
-				iconPath + "droneGallery/droneSEN.png");
-
 		JLabel labelDroneSwitchOn = new JLabel(iconSwitchOn);
-		ImageIcon iconEmpty1 = new ImageIcon(
-				iconPath + "empty.png");
 		JLabel labelDroneEmpty1 = new JLabel(iconEmpty1);
 		JLabel labelDroneEmpty2 = new JLabel(iconEmpty1);
 		JLabel labelDroneEmpty3 = new JLabel(iconEmpty1);
 
-		// Drone Gallery Icons
-
-		ImageIcon iconDroneGalleryAA108 = new ImageIcon(
-				iconPath + "droneGallery/AA108.png");
-		ImageIcon iconDroneGalleryChromaCameraDrone = new ImageIcon(
-				iconPath + "droneGallery/Chroma Camera Drone.png");
-		ImageIcon iconDroneGalleryD80 = new ImageIcon(
-				iconPath + "droneGallery/D80.png");
-		ImageIcon iconDroneGalleryEvoII = new ImageIcon(
-				iconPath + "droneGallery/Evo II.png");
-		ImageIcon iconDroneGalleryF24Pro = new ImageIcon(
-				iconPath + "droneGallery/F24 Pro.png");
-		ImageIcon iconDroneGalleryHS100 = new ImageIcon(
-				iconPath + "droneGallery/HS100.png");
-		ImageIcon iconDroneGalleryKarma = new ImageIcon(
-				iconPath + "droneGallery/Karma.png");
-		ImageIcon iconDroneGalleryPowerEggX = new ImageIcon(
-				iconPath + "droneGallery/PowerEgg X.png");
-		ImageIcon iconDroneGalleryS5C = new ImageIcon(
-				iconPath + "droneGallery/S5C.png");
-		ImageIcon iconDroneGallerySkydio2 = new ImageIcon(
-				iconPath + "droneGallery/Skydio 2.png");
-		ImageIcon iconDroneGalleryTello = new ImageIcon(
-				iconPath + "droneGallery/Tello.png");
-		ImageIcon iconDroneGalleryTyphoonHPro = new ImageIcon(
-				iconPath + "droneGallery/Typhoon H Pro.png");
-		ImageIcon iconDroneGalleryVoyager4 = new ImageIcon(
-				iconPath + "droneGallery/Voyager 4.png");
-		ImageIcon iconDroneGalleryX4H107D = new ImageIcon(
-				iconPath + "droneGallery/X4 H107D.png");
-		ImageIcon iconDroneGalleryX5C = new ImageIcon(
-				iconPath + "droneGallery/X5C.png");
+		// Drones Array
 		String[] dronesArray = new String[listOfDrones.size()];
 		for (DroneList drone : listOfDrones) {
 			String droneTableInfos = "# " + drone.getId() + "    " + drone.getDroneType().getManufacturer();
@@ -175,7 +158,6 @@ public class uiHandler extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
-
 					String droneId = String.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getId());
 					labelId.setText("Drone ID: " + droneId);
 
@@ -184,7 +166,6 @@ public class uiHandler extends JFrame {
 					String droneSerialnumber = String
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getSerialnumber());
 					labelSerialnumber.setText("Serialnumber: " + droneSerialnumber);
-
 
 					String droneCarriageWeight = String
 							.valueOf(listOfDrones.get(DroneTable.getSelectedIndex()).getCarriageWeight());
@@ -419,9 +400,9 @@ public class uiHandler extends JFrame {
 		List<String> dates1 = new ArrayList<>();
 
 		// Iterate over the first two elements of the list
-		for (int i = 0; i < 2; i++) {
+		for (DroneDynamics droneDynamics : listOfDronesDynamicTimeStamp) {
 			// Get the timestamp
-			LocalDateTime timestamp = listOfDronesDynamicTimeStamp.get(i).getTimestamp();
+			LocalDateTime timestamp = droneDynamics.getTimestamp();
 
 			// Format the date
 			String date = String.format("%02d/%02d/%d",
@@ -475,8 +456,13 @@ public class uiHandler extends JFrame {
 		DroneTableScroller.setBorder(new TitledBorder("Drone List"));
 		// to open a dialog box with the about us information
 		aboutUsButton.addActionListener(e -> JOptionPane.showMessageDialog(null,
-				"Drone Simulation Interface" + "\n" + "Version 1.0" + "\n" + "Developed by:" + "\n"
-						+ "Koosha and Tara" + "\n" + ""));
+				"Drone Simulation Interface" + "\n" + "Object Oriented Programming with Java" + "\n"
+						+ "Prof. Dr. Robin Müller-Bady" + "\n"
+						+ "Frankfurt University of Applied Sciences" + "\n"
+						+ "" + "\n" + "\n" + "Developed by:" + "\n"
+						+ "Group 22" + "\n" + "\n" + "Group Members:" + "\n" + "Koosha Olad" + "\n" + "Tara Khoramnia"
+						+ "\n" + "Hana Khaled Ismail Eltalawy" + "\n" + "Reubin Sam Thomas" + "\n" + "Kartik Riziya"
+						+ "" + "\n" + "\n" + "Winter Semester 2023-24"));
 
 		DroneTableScroller.setPreferredSize(new Dimension(250, 300)); // Set your desired width and height
 

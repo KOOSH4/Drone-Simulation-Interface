@@ -83,7 +83,9 @@ public class Main {
 	 * It also initializes the UI handler and sets it to visible.
 	 * If an exception occurs during this process, it logs the error message.
 	 *
-	 * @param args
+	 * @param args this is a standard parameter passed into the main method of a
+	 *             Java
+	 *             program. This is the standard application entry point in Java.
 	 */
 	public static void main(String[] args) {
 		try {
@@ -100,11 +102,16 @@ public class Main {
 
 			Helper.getDroneDynamics(droneApiHandler, listOfDrones, minutesBefore, listOfDronesDynamicTimeStamp);
 			listOfDrones.get(0).getDroneDynamics().printStatus();
-			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes, droneApiHandler, minutesBefore,
+			uiHandler droneUI = new uiHandler(listOfDrones, listOfDroneTypes,
+					droneApiHandler, minutesBefore,
 					listOfDronesDynamicTimeStamp);
 			droneUI.setVisible(true);
-			LOG.info("Size of drone list: " + listOfDrones.size());
-			LOG.info("Size of drone type list: " + listOfDroneTypes.size());
+			// Dashboard dashboard = new Dashboard(droneApiHandler, listOfDrones,
+			// listOfDroneTypes,
+			// listOfDronesDynamicTimeStamp, minutesBefore);
+			// dashboard.setVisible(true);
+			// LOG.info("Size of drone list: " + listOfDrones.size());
+			// LOG.info("Size of drone type list: " + listOfDroneTypes.size());
 
 			LOG.info("Done.");
 		} catch (Exception e) {
